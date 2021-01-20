@@ -26,10 +26,10 @@
 
 # Dos Produtos
   Será necessário informar: 
-      - O nome
-      - Tipo de Produto
-      - Data de validade
-      - Quantidade
-      - Volume(Kg)
+    - O nome
+    - Tipo de Produto
+    - Data de validade
+    - Quantidade
+    - Volume(Kg)
 
   
