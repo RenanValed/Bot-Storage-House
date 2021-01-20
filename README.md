@@ -15,7 +15,7 @@
   consumidos, podendo este, indicar o mais consumido e menos consumido, para assim na proxima reposição de produtos economizar
   com estes menos utilizados, afim de dar maior rentabilidade e economia para/com os indivíduos.
 
-# Do questionário de configuração
+# Da configuração
   O bot necessita saber quais os hábitos e costumes familiares, os quais variam em cada casa.
   Dessa forma, a maquina irá fazer um questionário, afim da personalização do programa.
   Tais questionamentos terão as seguintes perguntas como base:
