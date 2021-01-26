@@ -9,20 +9,22 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 //Interfaces
 void menuSobre(void);
 void menubot(void);
-void menudono(void);
-void menumorador(void);
+void menuMorador(void);
 
 
 int main(void) {
     menuSobre();
+    menubot();
+    menuMorador();
     return 0;
 
 }
 void menuSobre(void) {
-   printf("================================================================================\n");
+    printf("================================================================================\n");
     printf("===                                                                         ===\n");
     printf("=== CCCCC   CCCCC  CC   CC        C       C   C  CC    C  CCC    CCCCC      ===\n");
     printf("=== C   C   C      C C C C         C     C    C  C C   C  C  C   C   C      ===\n");
@@ -31,6 +33,8 @@ void menuSobre(void) {
     printf("=== CCCC    CCCCC  C     C            C       C  C    CC  CCC    CCCCC      ===\n");
     printf("===                                                                         ===\n");
     printf("===============================================================================\n\n");
+    sleep(1);
+    system("clear");
     printf("===============================================================================\n");
     printf("===                                                                         ===\n");
     printf("===             Universidade Federal do Rio Grande do Norte                 ===\n");
@@ -41,30 +45,54 @@ void menuSobre(void) {
     printf("===                Developed by  @ooo.renan - Jan, 2021                     ===\n");
     printf("===                                                                         ===\n");
     printf("===============================================================================\n");
-
+    sleep(4);
+    system("clear");
     printf("===============================================================================\n");
     printf("===                  = = = = =  Bot Storage House  = = = = =                ===\n");
     printf("===                                                                         ===\n");
     printf("===    Este bot tem como função monitorar o armazenamento de alimentos e    ===\n");
     printf("===  Produtos, afim de promover economia e melhorar os hábitos alimentícios ===\n");
     printf("===============================================================================\n");
-    
+  printf("\n\t→ click <ENTER> for next...\n");
+  getchar();
 }
 
 void menubot(void){
-  system("cls");
-    printf("\t\t========================================================");
-    printf("\t\t==               Menu Bot Control                     ==");
-    printf("\t\t========================================================");
-    printf("\t\t==                                                    ==");
-    printf("\t\t==    1- Configurar                                   ==");
-    printf("\t\t==    2- Atualizar Dados                              ==");
-    printf("\t\t==    3- Relatório                                    ==");
-    printf("\t\t==    4- Exibir Informações Atuais                    ==");
-    printf("\t\t==    5- Configurar Notificações                      ==");
-    printf("\t\t==    6- Deletar Dados                                ==");
-    printf("\t\t========================================================");
-  printf("\t\t\t→ click <ENTER> for next...\n");
+  system("clear");
+    printf("========================================================\n");
+    printf("==               Menu Bot Control                     ==\n");
+    printf("========================================================\n");
+    printf("==                                                    ==\n");
+    printf("==    1- Configurar                                   ==\n");
+    printf("==    2- Atualizar Dados                              ==\n");
+    printf("==    3- Relatório                                    ==\n");
+    printf("==    4- Exibir Informações Atuais                    ==\n");
+    printf("==    5- Configurar Notificações                      ==\n");
+    printf("==    6- Deletar Dados                                ==\n");
+    printf("==    7- Configurar Metas Dos Usuários                ==\n");
+    printf("==    0- Voltar ao Menu principal                     ==\n");
+    printf("========================================================\n");
+  printf("\n\t→ click <ENTER> for next...\n");
+  getchar();
+
+}
+
+void menuMorador(void){
+  system("clear");
+    printf("========================================================\n");
+    printf("==                  Menu Morador                      ==\n");
+    printf("========================================================\n");
+    printf("==                                                    ==\n");
+    printf("==    1- Pegar item                                   ==\n");
+    printf("==    2- Descartar item                               ==\n");
+    printf("==    3- Meu Relatório                                ==\n");
+    printf("==    4- Exibir meus dados atuais                     ==\n");
+    printf("==    5- Notificações                                 ==\n");
+    printf("==    6- Atualizar dados                              ==\n");
+    printf("==    7- Metas da semana                              ==\n");
+    printf("==    0- Voltar ao Menu principal                     ==\n");
+    printf("========================================================\n");
+  printf("\n\t→ click <ENTER> for next...\n");
   getchar();
 
 }
