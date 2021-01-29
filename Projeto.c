@@ -14,12 +14,16 @@
 void menuSobre(void);
 void menubot(void);
 void menuMorador(void);
+void menuConfigBot(void);
+void configPadrao(void);
 
 
 int main(void) {
     menuSobre();
     menubot();
     menuMorador();
+    menuConfigBot();
+    configPadrao();
     return 0;
 
 }
@@ -95,4 +99,31 @@ void menuMorador(void){
   printf("\n\t→ click <ENTER> for next...\n");
   getchar();
 
+}
+
+void menuConfigBot(void){
+  system("clear");
+  printf("========================================================\n");
+  printf("==              Menu Configuration BHS                ==\n");
+  printf("========================================================\n");
+  printf("==    → Serão Feitas algumas perguntas pessoais       ==\n");
+  printf("==                                                    ==\n");
+  printf("==    → Deseja Seguir com a personalização ou dese-   ==\n");
+  printf("==  ja usar configurações já definidas?               ==\n");
+  printf("==                                                    ==\n");
+  printf("==    1- Personalizar        2- Escolher Padrão       ==\n");
+  printf("========================================================\n");
+  printf("\n\t→ click <ENTER> for next...\n");
+  getchar();
+
+}
+void configPadrao(void){
+  system("clear");
+  printf("========================================================\n");
+  printf("==                  Personalizar Bot                  ==\n");
+  printf("========================================================\n");
+  printf("\t → Quantas pessoas moram na casa?\n");
+  getchar();
+  printf("\t → Quantos animais há na casa?\n");
+  getchar();
 }
