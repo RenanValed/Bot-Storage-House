@@ -126,4 +126,16 @@ void configPadrao(void){
   getchar();
   printf("\t → Quantos animais há na casa?\n");
   getchar();
+  printf("\t → Quantos Litros de água são consumidos por todos na casa?\n");
+  getchar();
+  printf("\t → Quantas frutas são consumidas por dia pela casa?\n");
+  getchar();
+  printf("\t → Quantas refeições são feitas ai dia?\n");
+  getchar();
+  printf("\t → Qual o tipo de comida mais consumida?\n");
+  getchar();
+  printf("\t → Qual refeição é mais calorosa?\n");
+  getchar();
+  printf("\t → Quantas feiras são feitas ao mes?\n");
+  getchar();
 }
