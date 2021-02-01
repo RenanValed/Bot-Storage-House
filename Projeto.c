@@ -10,16 +10,21 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-//Interfaces
+
+// Inicialização
 void menuSobre(void);
-void menubot(void);
+
 void menuMorador(void);
-void menuConfigBot(void);
-void configPadrao(void);
 void pegarItem(void);
 void storageArmario(void);
 void storageGeladeira(void);
 void storageFreezer(void);
+
+void menubot(void);
+void menuConfigBot(void);
+void configPadrao(void);
+void atualizarBot(void);
+void exibirDados(void);
 
 
 int main(void) {
@@ -28,6 +33,8 @@ int main(void) {
     menuMorador();
     menuConfigBot();
     configPadrao();
+    atualizarBot();
+    exibirDados();
     pegarItem();
     storageArmario();
     storageFreezer();
@@ -35,6 +42,8 @@ int main(void) {
     return 0;
 
 }
+
+/// Start ///
 void menuSobre(void) {
     printf("================================================================================\n");
     printf("===                                                                         ===\n");
@@ -69,41 +78,21 @@ void menuSobre(void) {
   getchar();
 }
 
+
+///////////// Sobre o Bot////////////////
 void menubot(void){
   system("clear");
-    printf("========================================================\n");
-    printf("==               Menu Bot Control                     ==\n");
-    printf("========================================================\n");
-    printf("==                                                    ==\n");
-    printf("==    1- Configurar                                   ==\n");
-    printf("==    2- Atualizar Dados                              ==\n");
-    printf("==    3- Relatório                                    ==\n");
-    printf("==    4- Exibir Informações Atuais                    ==\n");
-    printf("==    5- Configurar Notificações                      ==\n");
-    printf("==    6- Deletar Dados                                ==\n");
-    printf("==    7- Configurar Metas Dos Usuários                ==\n");
-    printf("==    0- Voltar ao Menu principal                     ==\n");
-    printf("========================================================\n");
-  printf("\n\t→ click <ENTER> for next...\n");
-  getchar();
-
-}
-
-void menuMorador(void){
-  system("clear");
-    printf("========================================================\n");
-    printf("==                  Menu Morador                      ==\n");
-    printf("========================================================\n");
-    printf("==                                                    ==\n");
-    printf("==    1- Pegar item                                   ==\n");
-    printf("==    2- Descartar item                               ==\n");
-    printf("==    3- Meu Relatório                                ==\n");
-    printf("==    4- Exibir meus dados atuais                     ==\n");
-    printf("==    5- Notificações                                 ==\n");
-    printf("==    6- Atualizar dados                              ==\n");
-    printf("==    7- Metas da semana                              ==\n");
-    printf("==    0- Voltar ao Menu principal                     ==\n");
-    printf("========================================================\n");
+  printf("========================================================\n");
+  printf("==               Menu Bot Control                     ==\n");
+  printf("========================================================\n");
+  printf("==                                                    ==\n");
+  printf("==    1- Configurar                                   ==\n"); //ok
+  printf("==    2- Atualizar Dados                              ==\n"); //ok
+  printf("==    3- Relatório                                    ==\n"); //
+  printf("==    4- Exibir Informações Atuais                    ==\n"); //ok
+  printf("==    5- Deletar Dados                                ==\n"); //
+  printf("==    0- Voltar ao Menu principal                     ==\n"); 
+  printf("========================================================\n");
   printf("\n\t→ click <ENTER> for next...\n");
   getchar();
 
@@ -147,6 +136,49 @@ void configPadrao(void){
   getchar();
   printf("\t → Quantas feiras são feitas ao mes?\n");
   getchar();
+  printf("\t → Quantos compartimentos tem a casa?\n");
+  getchar();
+}
+
+void atualizarBot(void){
+  system("clear");
+  printf("========================================================\n");
+  printf("==                   Atualizar Bot                    ==\n");
+  printf("========================================================\n");
+  printf(" \n\t*Será exibido todos os dados Atuais*");
+  printf(" \n\t→ Qual opção quer atualizar?");
+  getchar();
+}
+
+void exibirDados(void){
+    system("clear");
+  printf("========================================================\n");
+  printf("==             Dados Cadastrados no Bot               ==\n");
+  printf("========================================================\n");
+  printf("\n\t *Será exibido os dados atuais*");
+  getchar();
+}
+
+//////////////// Sobre o morador ///////////////
+
+void menuMorador(void){
+  system("clear");
+    printf("========================================================\n");
+    printf("==                  Menu Morador                      ==\n");
+    printf("========================================================\n");
+    printf("==                                                    ==\n");
+    printf("==    1- Pegar item                                   ==\n"); //ok
+    printf("==    2- Descartar item                               ==\n"); //
+    printf("==    3- Meu Relatório                                ==\n"); //
+    printf("==    4- Exibir meus dados Pessoais atuais            ==\n"); //
+    printf("==    5- Relatório da Casa                            ==\n"); //
+    printf("==    6- Atualizar dados                              ==\n"); //
+    printf("==    7- Metas da semana                              ==\n"); //
+    printf("==    0- Voltar ao Menu principal                     ==\n"); 
+    printf("========================================================\n"); 
+  printf("\n\t→ click <ENTER> for next...\n");
+  getchar();
+
 }
 
 void pegarItem(void){
@@ -186,3 +218,4 @@ void storageFreezer(void){
   printf(" \n\t*lista com todos os itens do estoque*");
   getchar();
 }
+
