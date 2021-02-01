@@ -16,6 +16,10 @@ void menubot(void);
 void menuMorador(void);
 void menuConfigBot(void);
 void configPadrao(void);
+void pegarItem(void);
+void storageArmario(void);
+void storageGeladeira(void);
+void storageFreezer(void);
 
 
 int main(void) {
@@ -24,6 +28,10 @@ int main(void) {
     menuMorador();
     menuConfigBot();
     configPadrao();
+    pegarItem();
+    storageArmario();
+    storageFreezer();
+    storageGeladeira();
     return 0;
 
 }
@@ -117,6 +125,7 @@ void menuConfigBot(void){
   getchar();
 
 }
+
 void configPadrao(void){
   system("clear");
   printf("========================================================\n");
@@ -137,5 +146,43 @@ void configPadrao(void){
   printf("\t → Qual refeição é mais calorosa?\n");
   getchar();
   printf("\t → Quantas feiras são feitas ao mes?\n");
+  getchar();
+}
+
+void pegarItem(void){
+  system("clear");
+  printf("========================================================\n");
+  printf("==                      Pegar Item                    ==\n");
+  printf("========================================================\n");
+  printf("==    1- Geladeira              2- Armário            ==\n");
+  printf("==    3- Freezer                0- Sair               ==\n");
+  printf("========================================================\n");
+  getchar();
+}
+
+void storageGeladeira(void){
+  system("clear");
+  printf("========================================================\n");
+  printf("==                      Geladeira                     ==\n");
+  printf("========================================================\n"); 
+  printf(" \n\t*lista com todos os itens do estoque*");
+  getchar();
+}
+
+void storageArmario(void){
+  system("clear");
+  printf("========================================================\n");
+  printf("==                        Armário                     ==\n");
+  printf("========================================================\n"); 
+  printf(" \n\t*lista com todos os itens do estoque*");
+  getchar();
+}
+
+void storageFreezer(void){
+  system("clear");
+  printf("========================================================\n");
+  printf("==                       Freezer                      ==\n");
+  printf("========================================================\n"); 
+  printf(" \n\t*lista com todos os itens do estoque*");
   getchar();
 }
