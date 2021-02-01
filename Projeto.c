@@ -25,6 +25,8 @@ void menuConfigBot(void);
 void configPadrao(void);
 void atualizarBot(void);
 void exibirDados(void);
+void relatorioGeral(void);
+void deletarDadosBot(void);
 
 
 int main(void) {
@@ -35,6 +37,8 @@ int main(void) {
     configPadrao();
     atualizarBot();
     exibirDados();
+    relatorioGeral();
+    deletarDadosBot();
     pegarItem();
     storageArmario();
     storageFreezer();
@@ -88,9 +92,9 @@ void menubot(void){
   printf("==                                                    ==\n");
   printf("==    1- Configurar                                   ==\n"); //ok
   printf("==    2- Atualizar Dados                              ==\n"); //ok
-  printf("==    3- Relatório                                    ==\n"); //
+  printf("==    3- Relatório                                    ==\n"); //ok
   printf("==    4- Exibir Informações Atuais                    ==\n"); //ok
-  printf("==    5- Deletar Dados                                ==\n"); //
+  printf("==    5- Deletar Dados                                ==\n"); //ok
   printf("==    0- Voltar ao Menu principal                     ==\n"); 
   printf("========================================================\n");
   printf("\n\t→ click <ENTER> for next...\n");
@@ -124,8 +128,6 @@ void configPadrao(void){
   getchar();
   printf("\t → Quantos animais há na casa?\n");
   getchar();
-  printf("\t → Quantos Litros de água são consumidos por todos na casa?\n");
-  getchar();
   printf("\t → Quantas frutas são consumidas por dia pela casa?\n");
   getchar();
   printf("\t → Quantas refeições são feitas ai dia?\n");
@@ -151,11 +153,30 @@ void atualizarBot(void){
 }
 
 void exibirDados(void){
-    system("clear");
+  system("clear");
   printf("========================================================\n");
   printf("==             Dados Cadastrados no Bot               ==\n");
   printf("========================================================\n");
   printf("\n\t *Será exibido os dados atuais*");
+  getchar();
+}
+
+void relatorioGeral(void){
+  system("clear");
+  printf("========================================================\n");
+  printf("==                    Relatório Geral                 ==\n");
+  printf("========================================================\n");
+  printf("\n\t *Será exibido os dados Gerais, tais como: entradas, saidas, sobras e dicas para economizar no próximo mês*");
+  getchar();
+}
+
+void deletarDadosBot(void){
+  system("clear");
+  printf("========================================================\n");
+  printf("==                Deletar Dados do bot                ==\n");
+  printf("========================================================\n");
+  printf("\n\t *Será exibido os dados atuais*");
+  printf("\n\t →Qual dado será excluido?");
   getchar();
 }
 
