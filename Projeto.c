@@ -15,10 +15,14 @@
 void menuSobre(void);
 
 void menuMorador(void);
+void selectionStorage(void);
 void pegarItem(void);
+void descarte(void);
 void storageArmario(void);
 void storageGeladeira(void);
 void storageFreezer(void);
+void weekGoal(void);
+void relatorioPessoal(void);
 
 void menubot(void);
 void menuConfigBot(void);
@@ -40,9 +44,13 @@ int main(void) {
     relatorioGeral();
     deletarDadosBot();
     pegarItem();
+    descarte();
+    selectionStorage();
     storageArmario();
     storageFreezer();
     storageGeladeira();
+    relatorioGeral();
+    weekGoal();
     return 0;
 
 }
@@ -90,11 +98,11 @@ void menubot(void){
   printf("==               Menu Bot Control                     ==\n");
   printf("========================================================\n");
   printf("==                                                    ==\n");
-  printf("==    1- Configurar                                   ==\n"); //ok
-  printf("==    2- Atualizar Dados                              ==\n"); //ok
-  printf("==    3- Relatório                                    ==\n"); //ok
-  printf("==    4- Exibir Informações Atuais                    ==\n"); //ok
-  printf("==    5- Deletar Dados                                ==\n"); //ok
+  printf("==    1- Configurar                                   ==\n"); 
+  printf("==    2- Atualizar Dados                              ==\n"); 
+  printf("==    3- Relatório                                    ==\n"); 
+  printf("==    4- Exibir Informações Atuais                    ==\n"); 
+  printf("==    5- Deletar Dados                                ==\n"); 
   printf("==    0- Voltar ao Menu principal                     ==\n"); 
   printf("========================================================\n");
   printf("\n\t→ click <ENTER> for next...\n");
@@ -189,12 +197,10 @@ void menuMorador(void){
     printf("========================================================\n");
     printf("==                                                    ==\n");
     printf("==    1- Pegar item                                   ==\n"); //ok
-    printf("==    2- Descartar item                               ==\n"); //
-    printf("==    3- Meu Relatório                                ==\n"); //
-    printf("==    4- Exibir meus dados Pessoais atuais            ==\n"); //
-    printf("==    5- Relatório da Casa                            ==\n"); //
-    printf("==    6- Atualizar dados                              ==\n"); //
-    printf("==    7- Metas da semana                              ==\n"); //
+    printf("==    2- Descartar item                               ==\n"); //ok
+    printf("==    3- Meu Relatório                                ==\n"); //ok
+    printf("==    4- Relatório da Casa                            ==\n"); //ok
+    printf("==    6- Metas da semana                              ==\n"); //
     printf("==    0- Voltar ao Menu principal                     ==\n"); 
     printf("========================================================\n"); 
   printf("\n\t→ click <ENTER> for next...\n");
@@ -202,10 +208,10 @@ void menuMorador(void){
 
 }
 
-void pegarItem(void){
+void selectionStorage(void){
   system("clear");
   printf("========================================================\n");
-  printf("==                      Pegar Item                    ==\n");
+  printf("==                  Selection storage                 ==\n");
   printf("========================================================\n");
   printf("==    1- Geladeira              2- Armário            ==\n");
   printf("==    3- Freezer                0- Sair               ==\n");
@@ -240,3 +246,37 @@ void storageFreezer(void){
   getchar();
 }
 
+void pegarItem(void){
+  system("clear");
+  printf("========================================================\n");
+  printf("==                      Pegar item                    ==\n");
+  printf("========================================================\n");
+  selectionStorage();
+
+}
+
+void descarte(void){
+  system("clear");
+  printf("========================================================\n");
+  printf("==                  Descartar item                    ==\n");
+  printf("========================================================\n");
+  selectionStorage();
+}
+
+void relatorioPessoal(void){
+  system("clear");
+  printf("========================================================\n");
+  printf("==                  Relatório Pessoal                 ==\n");
+  printf("========================================================\n");
+  printf("\n\t *Será exibido os dados do Individo, tais como: entradas, saidas, descartes");
+  getchar();
+}
+
+void weekGoal(void){
+    system("clear");
+  printf("========================================================\n");
+  printf("==                   Metas da Semana                  ==\n");
+  printf("========================================================\n");
+  printf("\n\t *Será exibido os dados do Individo, tais como: o que aconteceu durante a semana passada e será inibido uma meta, pelo bot, assim como também o usuário poderá criar as própias metas.");
+  getchar();
+}
