@@ -13,44 +13,36 @@
 
 // Inicialização
 void menuSobre(void);
+char menuInicial(void);
+void cadastrarUser(void);
 
-void menuMorador(void);
-void selectionStorage(void);
+void userOptions(void);
+char menuMorador(void);
+char selectionStorage(void);
 void pegarItem(void);
 void descarte(void);
-void storageArmario(void);
-void storageGeladeira(void);
-void storageFreezer(void);
+char storageArmario(void);
+char storageGeladeira(void);
+char storageFreezer(void);
 void weekGoal(void);
 void relatorioPessoal(void);
 
-void menubot(void);
-void menuConfigBot(void);
+void botOptions(void);
+char menubot(void);
+char menuConfigBot(void);
 void configPadrao(void);
-void atualizarBot(void);
+char atualizarBot(void);
 void exibirDados(void);
 void relatorioGeral(void);
-void deletarDadosBot(void);
+char deletarDadosBot(void);
 
 
 int main(void) {
     menuSobre();
-    menubot();
-    menuMorador();
-    menuConfigBot();
-    configPadrao();
-    atualizarBot();
-    exibirDados();
-    relatorioGeral();
-    deletarDadosBot();
-    pegarItem();
-    descarte();
-    selectionStorage();
-    storageArmario();
-    storageFreezer();
-    storageGeladeira();
-    relatorioGeral();
-    weekGoal();
+    menuInicial();
+    cadastrarUser();
+    botOptions();
+    userOptions();
     return 0;
 
 }
@@ -90,9 +82,51 @@ void menuSobre(void) {
   getchar();
 }
 
+char menuInicial(void){
+  char opc;
+  system("clear");
+  printf("========================================================\n");
+  printf("==                   Menu Inicial                     ==\n");
+  printf("========================================================\n");
+  printf("==                                                    ==\n");
+  printf("==    1- Cadastrar                                    ==\n"); 
+  printf("==    2- Logar                                        ==\n"); 
+  printf("==    0- Sair                                         ==\n"); 
+  printf("========================================================\n");
+  printf("\n\t→ click <ENTER> for next...\n");
+  scanf("%c",&opc);
+  getchar();
+  return opc;
+}
+
+void cadastrarUser(void){
+  char user,pass;
+  system("clear");
+  printf("========================================================\n");
+  printf("==                Cadastrar Usuário                   ==\n");
+  printf("========================================================\n\n");
+  printf("\t→ Nome de Usuário: \n");
+  scanf("%c",&user);
+  printf("\t→ Senha: \n");
+  scanf("%c",&pass);
+  printf("\n\t→ click <ENTER> for next...\n");
+  getchar();
+  //Usuário e senha Serão guardados em um tipo de lista ou dicionário
+}
 
 ///////////// Sobre o Bot////////////////
-void menubot(void){
+void botOptions(void){
+  menubot();
+  menuConfigBot();
+  configPadrao();
+  atualizarBot();
+  exibirDados();
+  relatorioGeral();
+  deletarDadosBot();
+}
+
+char menubot(void){
+  char opc;
   system("clear");
   printf("========================================================\n");
   printf("==               Menu Bot Control                     ==\n");
@@ -105,12 +139,14 @@ void menubot(void){
   printf("==    5- Deletar Dados                                ==\n"); 
   printf("==    0- Voltar ao Menu principal                     ==\n"); 
   printf("========================================================\n");
-  printf("\n\t→ click <ENTER> for next...\n");
+  printf("\n\t→ Digite sua opção:\n");
+  scanf("%c",&opc);
   getchar();
-
+  return opc;
 }
 
-void menuConfigBot(void){
+char menuConfigBot(void){
+  char opc;
   system("clear");
   printf("========================================================\n");
   printf("==              Menu Configuration BHS                ==\n");
@@ -122,42 +158,47 @@ void menuConfigBot(void){
   printf("==                                                    ==\n");
   printf("==    1- Personalizar        2- Escolher Padrão       ==\n");
   printf("========================================================\n");
-  printf("\n\t→ click <ENTER> for next...\n");
+  printf("\n\t→ Digite sua opção:\n");
+  scanf("%c",&opc);
   getchar();
+  return opc;
 
 }
 
 void configPadrao(void){
+  char qntMoradores,qntPets,qntFrutas,qntRefeicao,tipoComida,refeicaoCalorosa,feirasMensais;
   system("clear");
   printf("========================================================\n");
   printf("==                  Personalizar Bot                  ==\n");
   printf("========================================================\n");
   printf("\t → Quantas pessoas moram na casa?\n");
-  getchar();
+  scanf("%c",&qntMoradores);
   printf("\t → Quantos animais há na casa?\n");
-  getchar();
+  scanf("%c",&qntPets);
   printf("\t → Quantas frutas são consumidas por dia pela casa?\n");
-  getchar();
+  scanf("%c",&qntFrutas);
   printf("\t → Quantas refeições são feitas ai dia?\n");
-  getchar();
+  scanf("%c",&qntRefeicao);
   printf("\t → Qual o tipo de comida mais consumida?\n");
-  getchar();
+  scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ]",&tipoComida);
   printf("\t → Qual refeição é mais calorosa?\n");
-  getchar();
+  scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ]",&refeicaoCalorosa);
   printf("\t → Quantas feiras são feitas ao mes?\n");
-  getchar();
-  printf("\t → Quantos compartimentos tem a casa?\n");
+  scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ]",&feirasMensais);
   getchar();
 }
 
-void atualizarBot(void){
+char atualizarBot(void){
+  char opc;
   system("clear");
   printf("========================================================\n");
   printf("==                   Atualizar Bot                    ==\n");
   printf("========================================================\n");
   printf(" \n\t*Será exibido todos os dados Atuais*");
   printf(" \n\t→ Qual opção quer atualizar?");
+  scanf("%c",&opc);
   getchar();
+  return opc;
 }
 
 void exibirDados(void){
@@ -178,19 +219,33 @@ void relatorioGeral(void){
   getchar();
 }
 
-void deletarDadosBot(void){
+char deletarDadosBot(void){
+  char opc;
   system("clear");
   printf("========================================================\n");
   printf("==                Deletar Dados do bot                ==\n");
   printf("========================================================\n");
   printf("\n\t *Será exibido os dados atuais*");
   printf("\n\t →Qual dado será excluido?");
+  scanf("%c",&opc);
   getchar();
 }
 
 //////////////// Sobre o morador ///////////////
+void userOptions(void){
+    menuMorador();
+    pegarItem();
+    descarte();
+    selectionStorage();
+    storageArmario();
+    storageFreezer();
+    storageGeladeira();
+    relatorioGeral();
+    weekGoal();
+}
 
-void menuMorador(void){
+char menuMorador(void){
+  char opc;
   system("clear");
     printf("========================================================\n");
     printf("==                  Menu Morador                      ==\n");
@@ -203,12 +258,14 @@ void menuMorador(void){
     printf("==    6- Metas da semana                              ==\n"); //
     printf("==    0- Voltar ao Menu principal                     ==\n"); 
     printf("========================================================\n"); 
-  printf("\n\t→ click <ENTER> for next...\n");
+  printf("\n\t→ Digite sua opção:\n");
+  scanf("%c",&opc);
   getchar();
-
+  return opc;
 }
 
-void selectionStorage(void){
+char selectionStorage(void){
+  char opc;
   system("clear");
   printf("========================================================\n");
   printf("==                  Selection storage                 ==\n");
@@ -216,34 +273,49 @@ void selectionStorage(void){
   printf("==    1- Geladeira              2- Armário            ==\n");
   printf("==    3- Freezer                0- Sair               ==\n");
   printf("========================================================\n");
+  printf("\n\t→ Digite sua opção:\n");
+  scanf("%c",&opc);
   getchar();
+  return opc;
 }
 
-void storageGeladeira(void){
+char storageGeladeira(void){
+  char opc;
   system("clear");
   printf("========================================================\n");
   printf("==                      Geladeira                     ==\n");
   printf("========================================================\n"); 
   printf(" \n\t*lista com todos os itens do estoque*");
+  printf("\n\t→ Digite sua opção:\n");
+  scanf("%c",&opc);
   getchar();
+  return opc;
 }
 
-void storageArmario(void){
+char storageArmario(void){
+  char opc;
   system("clear");
   printf("========================================================\n");
   printf("==                        Armário                     ==\n");
   printf("========================================================\n"); 
   printf(" \n\t*lista com todos os itens do estoque*");
+  printf("\n\t→ Digite sua opção:\n");
+  scanf("%c",&opc);
   getchar();
+  return opc;
 }
 
-void storageFreezer(void){
+char storageFreezer(void){
+  char opc;
   system("clear");
   printf("========================================================\n");
   printf("==                       Freezer                      ==\n");
   printf("========================================================\n"); 
   printf(" \n\t*lista com todos os itens do estoque*");
+  printf("\n\t→ Digite sua opção:\n");
+  scanf("%c",&opc);
   getchar();
+  return opc;
 }
 
 void pegarItem(void){
@@ -273,7 +345,7 @@ void relatorioPessoal(void){
 }
 
 void weekGoal(void){
-    system("clear");
+  system("clear");
   printf("========================================================\n");
   printf("==                   Metas da Semana                  ==\n");
   printf("========================================================\n");
