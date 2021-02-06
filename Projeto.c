@@ -93,7 +93,7 @@ char menuInicial(void){
   printf("==    2- Logar                                        ==\n"); 
   printf("==    0- Sair                                         ==\n"); 
   printf("========================================================\n");
-  printf("\n\t→ click <ENTER> for next...\n");
+  printf("\n\t→ Sua opção:\n");
   scanf("%c",&opc);
   getchar();
   return opc;
@@ -106,10 +106,9 @@ void cadastrarUser(void){
   printf("==                Cadastrar Usuário                   ==\n");
   printf("========================================================\n\n");
   printf("\t→ Nome de Usuário: \n");
-  scanf("%c",&user);
+  scanf("%[A-ZÇa-zç]",&user);
   printf("\t→ Senha: \n");
-  scanf("%c",&pass);
-  printf("\n\t→ click <ENTER> for next...\n");
+  scanf("%[A-ZÇa-zç0-9]",&pass);
   getchar();
   //Usuário e senha Serão guardados em um tipo de lista ou dicionário
 }
