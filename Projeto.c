@@ -165,25 +165,26 @@ char menuConfigBot(void){
 }
 
 void configPadrao(void){
-  char qntMoradores,qntPets,qntFrutas,qntRefeicao,tipoComida,refeicaoCalorosa,feirasMensais;
+  int qntMoradores,qntPets,qntFrutas,qntRefeicao,feirasMensais;
+  char tipoComida[30],refeicaoCalorosa[8];
   system("clear");
   printf("========================================================\n");
   printf("==                  Personalizar Bot                  ==\n");
   printf("========================================================\n");
   printf("\t → Quantas pessoas moram na casa?\n");
-  scanf("%c",&qntMoradores);
+  scanf("%d",&qntMoradores);
   printf("\t → Quantos animais há na casa?\n");
-  scanf("%c",&qntPets);
+  scanf("%d",&qntPets);
   printf("\t → Quantas frutas são consumidas por dia pela casa?\n");
-  scanf("%c",&qntFrutas);
+  scanf("%d",&qntFrutas);
   printf("\t → Quantas refeições são feitas ai dia?\n");
-  scanf("%c",&qntRefeicao);
+  scanf("%d",&qntRefeicao);
   printf("\t → Qual o tipo de comida mais consumida?\n");
-  scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ]",&tipoComida);
+  scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ]",tipoComida);
   printf("\t → Qual refeição é mais calorosa?\n");
-  scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ]",&refeicaoCalorosa);
+  scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ]",refeicaoCalorosa);
   printf("\t → Quantas feiras são feitas ao mes?\n");
-  scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ]",&feirasMensais);
+  scanf("%d",&feirasMensais);
   getchar();
 }
 
