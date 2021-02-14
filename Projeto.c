@@ -12,8 +12,10 @@
 #include <unistd.h>
 
 // Inicialização
+void sistemaBSH(void);
 void menuSobre(void);
 char menuInicial(void);
+void login(void);
 void cadastrarUser(void);
 
 void userOptions(void);
@@ -39,11 +41,23 @@ char deletarDadosBot(void);
 
 int main(void) {
     menuSobre();
-    menuInicial();
-    cadastrarUser();
-    botOptions();
-    userOptions();
+    sistemaBSH();
+    //menuInicial();
+    //cadastrarUser();
+    //botOptions();
+   // userOptions();
     return 0;
+
+}
+/// System ///
+
+void sistemaBSH(void){
+  char opc;
+  do{opc = menuInicial();
+}while(opc != "0");
+  printf("\n\tFim do programa");
+  
+  
 
 }
 
@@ -97,6 +111,21 @@ char menuInicial(void){
   scanf("%c",&opc);
   getchar();
   return opc;
+}
+
+void login(){
+  char user[20],pass[20];
+  system("clear");
+  printf("========================================================\n");
+  printf("==                     Menu Login                     ==\n");
+  printf("========================================================\n");
+  printf("\n\t→ Insira nome de Usuário:\n");
+  scanf("%[A-Za-z]",user);
+  getchar();
+  printf("\n\t→ Insira senha de Usuário:\n");
+  scanf("%[A-Za-z0-9]",pass);
+  getchar();
+  ;
 }
 
 void cadastrarUser(void){
