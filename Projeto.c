@@ -14,9 +14,9 @@
 // Inicialização
 void sistemaBSH(void);
 void menuSobre(void);
-char menuInicial(void);
+void menuInicial(void);
 void login(void);
-void cadastrarUser(void);
+char cadastrarUser(void);
 
 void userOptions(void);
 char menuMorador(void);
@@ -40,26 +40,35 @@ char deletarDadosBot(void);
 
 
 int main(void) {
-    menuSobre();
-    sistemaBSH();
-    //menuInicial();
-    //cadastrarUser();
-    //botOptions();
-   // userOptions();
+    //menuSobre();
+    int opcao;
+    menuInicial();
+    scanf("%d",&opcao);
+    getchar();
+
+    while(opcao != 0){
+      while((opcao != 0)&&(opcao != 1)&&(opcao != 2)){
+        menuInicial();
+        printf("\nOPÇÃO INVALIDA\n");
+        scanf("%d",&opcao);
+        getchar();
+      }
+      if (opcao == 1){
+        cadastrarUser();
+      }
+      if(opcao == 2){
+        login();
+      }
+      menuInicial();
+      scanf("%d",&opcao);
+      getchar();
+    }
+    printf("\n\tFim do programa");
     return 0;
 
 }
 /// System ///
 
-void sistemaBSH(void){
-  char opc;
-  do{opc = menuInicial();
-}while(opc != "0");
-  printf("\n\tFim do programa");
-  
-  
-
-}
 
 /// Start ///
 void menuSobre(void) {
@@ -96,8 +105,8 @@ void menuSobre(void) {
   getchar();
 }
 
-char menuInicial(void){
-  char opc;
+void menuInicial(void){
+  //char opc;
   system("clear");
   printf("========================================================\n");
   printf("==                   Menu Inicial                     ==\n");
@@ -108,9 +117,9 @@ char menuInicial(void){
   printf("==    0- Sair                                         ==\n"); 
   printf("========================================================\n");
   printf("\n\t→ Sua opção:\n");
-  scanf("%c",&opc);
-  getchar();
-  return opc;
+  //scanf("%c",&opc);
+  //getchar();
+  //return opc;
 }
 
 void login(){
@@ -128,17 +137,19 @@ void login(){
   ;
 }
 
-void cadastrarUser(void){
-  char user,pass;
+char cadastrarUser(void){
+  char user[20],pass[20];
   system("clear");
   printf("========================================================\n");
   printf("==                Cadastrar Usuário                   ==\n");
   printf("========================================================\n\n");
   printf("\t→ Nome de Usuário: \n");
-  scanf("%[A-ZÇa-zç]",&user);
-  printf("\t→ Senha: \n");
-  scanf("%[A-ZÇa-zç0-9]",&pass);
+  scanf("%[A-ZÇa-zç]",user);
   getchar();
+  printf("\t→ Senha: \n");
+  scanf("%[A-ZÇa-zç0-9]",pass);
+  getchar();
+  return user,pass;
   //Usuário e senha Serão guardados em um tipo de lista ou dicionário
 }
 
