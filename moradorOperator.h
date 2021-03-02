@@ -1,0 +1,10 @@
+int userOptions(void);
+int menuMorador(void);
+int selectionStorage(void);
+void pegarItem(void);
+void descarte(void);
+char storageArmario(void);
+char storageGeladeira(void);
+char storageFreezer(void);
+void weekGoal(void);
+void relatorioPessoal(void);
