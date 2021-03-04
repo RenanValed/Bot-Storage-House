@@ -4,4 +4,4 @@ void configBot(void);
 char atualizarBot(void);
 void exibirDados(void);
 void relatorioGeral(void);
-char deletarDadosBot(void);
+void deletarDadosBot(void);

@@ -1,2 +1,2 @@
 language = "c"
-run = "clang-7 -pthread -lm -o Projeto Projeto.c && ./Projeto"
+run = "clang-7 -pthread -lm -o Projeto Projeto.c botOperator.c moradorOperator.c && ./Projeto"

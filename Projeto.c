@@ -18,7 +18,7 @@ void sistemaBSH(void);
 void menuSobre(void);
 void menuInicial(void);
 void login(void);
-char cadastrarUser(void);
+void cadastrarUser(void);
 
 int main(void) {
     //menuSobre();
@@ -136,7 +136,7 @@ void login(){
   ;
 }
 
-char cadastrarUser(void){
+void cadastrarUser(void){
   char user[20],pass[20];
   system("clear");
   printf("========================================================\n");
@@ -148,6 +148,5 @@ char cadastrarUser(void){
   printf("\t→ Senha: \n");
   scanf("%[A-ZÇa-zç0-9]",pass);
   getchar();
-  return user,pass;
   //Usuário e senha Serão guardados em um tipo de lista ou dicionário
 }

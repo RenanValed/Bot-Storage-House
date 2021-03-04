@@ -1,5 +1,5 @@
 #include <stdio.h>
-
+#include <stdlib.h>
 ///////////// Sobre o Bot////////////////
 
 
@@ -25,7 +25,7 @@ int menubot(void){
 
 void configBot(void){
   int qntMoradores,qntPets,qntFrutas,qntRefeicao,feirasMensais;
-  char tipoComida[30],refeicaoCalorosa[8];
+  char refeicaoCalorosa[8];
   system("clear");
   printf("========================================================\n");
   printf("==                  Personalizar Bot                  ==\n");
@@ -42,9 +42,6 @@ void configBot(void){
   printf("\t → Quantas refeições são feitas ai dia?\n");
   scanf("%d",&qntRefeicao);
   getchar();
-  //printf("\t → Qual o tipo de comida mais consumida?\n");
-  //scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ]",tipoComida);
-  //getchar();
   printf("\t → Qual refeição é mais calorosa?\n");
   scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ]",refeicaoCalorosa);
   getchar();
@@ -85,7 +82,7 @@ void relatorioGeral(void){
   getchar();
 }
 
-char deletarDadosBot(void){
+void deletarDadosBot(void){
   char opc;
   system("clear");
   printf("========================================================\n");
