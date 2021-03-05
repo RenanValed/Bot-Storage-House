@@ -10,8 +10,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <string.h>
 #include "botOperator.h"
 #include "moradorOperator.h"
+#include "funcoes.h"
 
 // Inicialização
 void sistemaBSH(void);
@@ -137,16 +139,27 @@ void login(){
 }
 
 void cadastrarUser(void){
-  char user[20],pass[20];
+  char user[20], senha[20];
+  int validar;
   system("clear");
   printf("========================================================\n");
   printf("==                Cadastrar Usuário                   ==\n");
   printf("========================================================\n\n");
   printf("\t→ Nome de Usuário: \n");
-  scanf("%[A-ZÇa-zç]",user);
+  scanf("%s",user);
   getchar();
+  validar = temDigito(user);
+  while (validar){
+    printf("\n\t¢Não pode conter números no Usuário!\n");
+    printf("\t→ Nome de Usuário: \n");
+    scanf("%s",user);
+    getchar();
+    validar = temDigito(user);
+  }
+
+  
   printf("\t→ Senha: \n");
-  scanf("%[A-ZÇa-zç0-9]",pass);
+  scanf("%s",senha);
   getchar();
   //Usuário e senha Serão guardados em um tipo de lista ou dicionário
 }
