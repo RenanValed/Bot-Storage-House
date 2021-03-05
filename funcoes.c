@@ -9,15 +9,16 @@ int temDigito(char palavra[]) {
     }
   }
   return 0;
-  }
+}
+
 
 int temEspaco(char palavra[]){
-  char letra
+  char letra;
   for (int i = 0; i < strlen(palavra);i++){
     letra = palavra[i];
     if (letra == ' '){
-      return 1
+      return 1;
     }
   }
-  return 0
+  return 0;
 }

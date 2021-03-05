@@ -150,16 +150,25 @@ void cadastrarUser(void){
   getchar();
   validar = temDigito(user);
   while (validar){
-    printf("\n\t¢Não pode conter números no Usuário!\n");
+    printf("\n\t¢ Não pode conter números no Usuário!\n");
     printf("\t→ Nome de Usuário: \n");
     scanf("%s",user);
     getchar();
     validar = temDigito(user);
   }
-
   
   printf("\t→ Senha: \n");
-  scanf("%s",senha);
+  scanf("%[^\n]",senha);
   getchar();
+  validar = temEspaco(senha);
+  while (validar){
+    printf("\n\t¢ Não pode conter Espaços na senha!\n");
+    printf("\t→ Senha: \n");
+    scanf("%[^\n]",senha);
+    getchar();
+    validar = temEspaco(senha);
+  }
+  printf("\n\n\tUsuário Cadastrado com Sucesso!!\n");
+  sleep(2);
   //Usuário e senha Serão guardados em um tipo de lista ou dicionário
 }
