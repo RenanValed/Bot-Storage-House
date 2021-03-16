@@ -4,7 +4,7 @@
 //===               Departamento de Computação e Tecnologia                   ===
 //===                  Disciplina DCT1106 -- Programação                      ===
 //===                  Projeto Sistema de Gestão Escolar                      ===
-//===                Developed by  @ooo.renan - Jan, 2021                    ===
+//===                Developed by  @ooo.renan - 22 Jan, 2021                    ===
 //
 
 #include <stdio.h>
@@ -32,7 +32,8 @@ int main(void) {
     while(opcao != 0){
       while((opcao != 0)&&(opcao != 1)&&(opcao != 2)){
         menuInicial();
-        printf("\nOPÇÃO INVALIDA\n");
+        printf("\n\t¢ OPÇÃO INVALIDA!\n\n\t→ Sua opção:\n");
+        
         scanf("%d",&opcao);
         getchar();
       }
@@ -43,22 +44,19 @@ int main(void) {
         login();
         printf("\n\n\t→ Entrar como:\n\t1 - Morador\n\t0 - Bot\n\t→ ");
         scanf("%d",&logintype);
+        getchar();
         while((logintype != 1)&&(logintype != 0)){
+          printf("\n\n\t¢ Opção inválida!\n");
           printf("\n\n\t→ Entrar como:\n\t1 - Morador\n\t0 - Bot\n\t→");
           scanf("%d",&logintype);
+          getchar();
         }
       }
-      if (logintype == 1){
+      while (logintype == 1 && opc != 0){
         opc = userOptions() ;
-        while(opc != 0){
-          opc = userOptions();
-        }
       }
-      else if(logintype == 0){
+      while(logintype == 0 && opc != 0){
         opc = botOptions();
-        while(opc != 0){
-         opc = botOptions(); 
-        }
       }
       menuInicial();
       scanf("%d",&opcao);
@@ -125,48 +123,91 @@ void menuInicial(void){
 
 void login(){
   char user[20],pass[20];
+  int validar1,validar2,validar3;
   system("clear");
   printf("========================================================\n");
   printf("==                     Menu Login                     ==\n");
   printf("========================================================\n");
   printf("\n\t→ Insira nome de Usuário:\n");
-  scanf("%[A-Za-z]",user);
+  scanf("%[^\n]",user);
   getchar();
+  validar1 = temDigito(user);
+  validar2 = temEspaco(user);
+  validar3 = verificarASCII_invalida(user);
+  while (validar1 || validar2 || validar3){
+    if (validar1){
+      printf("\n\t¢ Não pode conter números!\n");
+    }
+    if(validar2){
+      printf("\n\t¢ Não pode conter Espaços!\n");
+    }
+    printf("\n\n\t→ Insira nome de Usuário:\n");
+    scanf("%[^\n]",user);
+    getchar();
+    validar1 = temDigito(user);
+    validar2 = temEspaco(user);
+    validar3 = verificarASCII_invalida(user);
+  }
+
   printf("\n\t→ Insira senha de Usuário:\n");
-  scanf("%[A-Za-z0-9]",pass);
+  scanf("%[^\n]",pass);
   getchar();
-  ;
+  validar2 = temEspaco(pass);
+  validar3 = verificarASCII_invalida(pass);
+  while (validar2 || validar3){
+    if(validar2){
+      printf("\n\t¢ Não pode conter Espaços!\n");
+    }
+    printf("\n\n\t→ Insira SENHA de Usuário:\n");
+    scanf("%[^\n]",pass);
+    getchar();
+    validar1 = temDigito(pass);
+    validar2 = temEspaco(pass);
+  }
 }
 
 void cadastrarUser(void){
   char user[20], senha[20];
-  int validar;
+  int validar, validar2,validar3;
   system("clear");
   printf("========================================================\n");
   printf("==                Cadastrar Usuário                   ==\n");
   printf("========================================================\n\n");
   printf("\t→ Nome de Usuário: \n");
-  scanf("%s",user);
+  scanf("%[^\n]",user);
   getchar();
   validar = temDigito(user);
-  while (validar){
-    printf("\n\t¢ Não pode conter números no Usuário!\n");
-    printf("\t→ Nome de Usuário: \n");
-    scanf("%s",user);
+  validar2 = temEspaco(user);
+  validar3 = verificarASCII_invalida(user);
+  while (validar || validar2 || validar3) {
+    if (validar){
+      printf("\n\t¢ Não pode conter números!\n");
+    }
+    if(validar2){
+      printf("\n\t¢ Não pode conter Espaços!\n");
+    }
+    printf("\n\t→ Nome de Usuário: \n");
+    scanf("%[^\n]",user);
     getchar();
     validar = temDigito(user);
+    validar2 = temEspaco(user);
+    validar3 = verificarASCII_invalida(user);
   }
   
   printf("\t→ Senha: \n");
   scanf("%[^\n]",senha);
   getchar();
   validar = temEspaco(senha);
-  while (validar){
-    printf("\n\t¢ Não pode conter Espaços na senha!\n");
+  validar3 = verificarASCII_invalida(senha);
+  while (validar || validar3){
+    if (validar){
+      printf("\n\t¢ Não pode conter Espaços!\n");
+    }
     printf("\t→ Senha: \n");
     scanf("%[^\n]",senha);
     getchar();
     validar = temEspaco(senha);
+    validar3 = verificarASCII_invalida(senha);
   }
   printf("\n\n\tUsuário Cadastrado com Sucesso!!\n");
   sleep(2);

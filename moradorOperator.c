@@ -7,26 +7,31 @@
 int menuMorador(void){
   int opc;
   system("clear");
-    printf("========================================================\n");
-    printf("==                  Menu Morador                      ==\n");
-    printf("========================================================\n");
-    printf("==                                                    ==\n");
-    printf("==    1- Pegar item                                   ==\n"); //ok
-    printf("==    2- Descartar item                               ==\n"); //ok
-    printf("==    3- Meu Relatório                                ==\n"); //ok
-    printf("==    4- Relatório da Casa                            ==\n"); //ok
-    printf("==    5- Metas da semana                              ==\n"); //
-    printf("==    0- Voltar ao Menu principal                     ==\n"); 
-    printf("========================================================\n"); 
+  printf("========================================================\n");
+  printf("==                  Menu Morador                      ==\n");
+  printf("========================================================\n");
+  printf("==                                                    ==\n");
+  printf("==    1- Pegar item                                   ==\n"); //ok
+  printf("==    2- Descartar item                               ==\n"); //ok
+  printf("==    3- Meu Relatório                                ==\n"); //ok
+  printf("==    4- Relatório da Casa                            ==\n"); //ok
+  printf("==    5- Metas da semana                              ==\n"); //
+  printf("==    0- Voltar ao Menu principal                     ==\n"); 
+  printf("========================================================\n"); 
   printf("\n\t→ Digite sua opção:\n");
   scanf("%d",&opc);
   getchar();
+  while (opc < 0 && opc > 5){
+    printf("\n\t¢ opção	Inválida!\n");
+    printf("\n\t→ Digite sua opção:\n");
+    scanf("%d",&opc);
+    getchar();
+  }
   return opc;
 }
 
 int selectionStorage(void){
   int esc;
-  //system("clear");
   printf("========================================================\n");
   printf("==                  Selection storage                 ==\n");
   printf("========================================================\n");
@@ -36,46 +41,49 @@ int selectionStorage(void){
   printf("\n\t→ Digite sua opção:\n");
   scanf("%d",&esc);
   getchar();
+  while(esc != 0 && esc != 1 && esc != 2 && esc != 3){
+    printf("\n\t¢ Opção Inválida!\n");
+    printf("\n\t→ Digite sua opção:\n");
+    scanf("%d",&esc);
+    getchar();
+  }
   return esc;
 }
 
-char storageGeladeira(void){
-  char opc;
+void storageGeladeira(void){
+  char opc[51];
   system("clear");
   printf("========================================================\n");
   printf("==                      Geladeira                     ==\n");
   printf("========================================================\n"); 
-  printf(" \n\t*lista com todos os itens do estoque*");
+  printf(" \n\t*Será exibido a lista com todos os itens do estoque*");
   printf("\n\t→ Digite sua opção:\n");
-  scanf("%c",&opc);
+  scanf("%s",opc);
   getchar();
-  return opc;
 }
 
-char storageArmario(void){
-  char opc;
+void storageArmario(void){
+  char opc[51];
   system("clear");
   printf("========================================================\n");
   printf("==                        Armário                     ==\n");
   printf("========================================================\n"); 
-  printf(" \n\t*lista com todos os itens do estoque*");
+  printf(" \n\t*Será exibido a lista com todos os itens do estoque*");
   printf("\n\t→ Digite sua opção:\n");
-  scanf("%c",&opc);
+  scanf("%s",opc);
   getchar();
-  return opc;
 }
 
-char storageFreezer(void){
-  char opc;
+void storageFreezer(void){
+  char opc[51];
   system("clear");
   printf("========================================================\n");
   printf("==                       Freezer                      ==\n");
   printf("========================================================\n"); 
-  printf(" \n\t*lista com todos os itens do estoque*");
+  printf(" \n\t*Será exibido a lista com todos os itens do estoque*");
   printf("\n\t→ Digite sua opção:\n");
-  scanf("%c",&opc);
+  scanf("%s",opc);
   getchar();
-  return opc;
 }
 
 void pegarItem(void){
@@ -119,9 +127,9 @@ int userOptions(void){
   if(opc1 == 1){
     pegarItem();
     esc = selectionStorage();
-    while ((esc != 0)&&(esc != 1)&&(esc != 2)&&(esc != 3)){
-      esc = selectionStorage();
-    }
+    // while ((esc != 0)&&(esc != 1)&&(esc != 2)&&(esc != 3)){
+    //   esc = selectionStorage();
+    // }
     if(esc == 1){
       storageGeladeira();
     }
@@ -136,9 +144,9 @@ int userOptions(void){
   if(opc1 == 2){
     descarte();
     esc = selectionStorage();
-    while ((esc != 0)&&(esc != 1)&&(esc != 2)&&(esc != 3)){
-      esc = selectionStorage();
-    }
+    // while ((esc != 0)&&(esc != 1)&&(esc != 2)&&(esc != 3)){
+    //   esc = selectionStorage();
+    // }
     if(esc == 1){
       storageGeladeira();
     }

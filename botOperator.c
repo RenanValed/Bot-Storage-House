@@ -1,10 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "funcoes.h"
 ///////////// Sobre o Bot////////////////
 
 
 int menubot(void){
-  int opc;
+  char opc[51];
+  int minimo = 0, maximo = 5,validar1,validar2,validar3,validar4,opc1;
   system("clear");
   printf("========================================================\n");
   printf("==               Menu Bot Control                     ==\n");
@@ -18,21 +20,64 @@ int menubot(void){
   printf("==    0- Voltar ao Menu principal                     ==\n"); 
   printf("========================================================\n");
   printf("\n\t→ Digite sua opção:\n");
-  scanf("%d",&opc);
+  scanf("%[^\n]",opc);
   getchar();
-  return opc;
+  validar1 = temLetra(opc);
+  validar2 = temEspaco(opc);
+  validar3 = verificarASCII_invalida(opc);
+  validar4 = 0;
+  if(!validar1 && !validar2 && !validar3){
+      opc1 = converterEmInteiro(opc);
+      validar4 = validarMenu(opc1,minimo,maximo);
+    }
+  printf("v1: %d\n",validar1);// int var1 1
+  printf("v2: %d\n",validar2);// int var2 1
+  printf("v3: %d\n",validar3);// int var3 1
+  printf("v4: %d\n",validar4);// int var4 0 - minimo maximo
+  while (validar1 || validar2 || validar3 || validar4){
+    if (validar1){
+      printf("\n\t¢ Você usou letras!");
+    }
+    if(validar2){
+      printf("\n\t¢ Você usou espaco!");
+    }
+    printf("\n\t¢ Opção Invalida!\n");
+    printf("\n\t→ Digite sua opção:\n");
+    scanf("%[^\n]",opc);
+    getchar();
+    validar1 = temLetra(opc);
+    validar2 = temEspaco(opc);
+    validar3 = verificarASCII_invalida(opc);
+    if(!validar1 && !validar2 && !validar3){
+      opc1 = converterEmInteiro(opc);
+      validar4 = validarMenu(opc1,minimo,maximo);
+    }
+    printf("v1: %d\n",validar1);
+    printf("v2: %d\n",validar2);
+    printf("v3: %d\n",validar3);
+    printf("v4: %d\n",validar4);
+  }
+  
+  return opc1;
 }
 
 void configBot(void){
-  int qntMoradores,qntPets,qntFrutas,qntRefeicao,feirasMensais;
-  char refeicaoCalorosa[8];
+  int qntPets,qntFrutas,qntRefeicao,feirasMensais,validar;
+  char qntMoradores[51];
   system("clear");
   printf("========================================================\n");
   printf("==                  Personalizar Bot                  ==\n");
   printf("========================================================\n");
   printf("\t → Quantas pessoas moram na casa?\n");
-  scanf("%d",&qntMoradores);
+  scanf("%s",qntMoradores);
   getchar();
+  validar = temDigito(qntMoradores);
+  while(!validar){
+    printf("\t → Quantas pessoas moram na casa?\n");
+    scanf("%s",qntMoradores);
+    getchar();
+    validar = temDigito(qntMoradores);
+  }
   printf("\t → Quantos animais há na casa?\n");
   scanf("%d",&qntPets);
   getchar();
@@ -41,9 +86,6 @@ void configBot(void){
   getchar();
   printf("\t → Quantas refeições são feitas ai dia?\n");
   scanf("%d",&qntRefeicao);
-  getchar();
-  printf("\t → Qual refeição é mais calorosa?\n");
-  scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ]",refeicaoCalorosa);
   getchar();
   printf("\t → Quantas feiras são feitas ao mes?\n");
   scanf("%d",&feirasMensais);
@@ -112,5 +154,5 @@ int botOptions(void){
   if(opc == 5){
     deletarDadosBot();
   }
-  return opc;
+  return 0;
 }
