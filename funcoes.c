@@ -156,3 +156,13 @@ int validarStringNumerica(char opc[]){ // retorna 1 se conter qualquer caractere
   }
   return 0;
 }
+
+int validarPalavra(char palavra[]){ // retorna 1 caso não seja apenas letras
+  int validar1,validar2;
+  validar1 = verificarASCII_invalida(palavra);
+  validar2 = temDigito(palavra);
+  if (validar1 || validar2){
+    return 1;
+  }
+  return 0;
+}

@@ -8,3 +8,4 @@ int converterEmInteiro(char[]);//Converte string Vetorica em Inteira
 int validarMenu(int,int,int);// Verifica se a opção digitada está dentro do limite
 int validarStringNumerica(char[]);//Valida se foi digitado apenas numeros sem espaços
 int tamanhoZero(char[]);//Verifica se o tamanho da sting é zero
+int validarPalavra(char[]);//Verifica se a entrada é palavra sem acentos

@@ -1,7 +1,19 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
 #include "botOperator.h"
 #include "funcoes.h"
+
+struct item{
+  char nome[81];
+  char validade[10];
+  int quantidade;
+  char perecivel;
+};
+
+typedef struct item Item;
+
 //////////////// Sobre o morador ///////////////
 
 
@@ -174,12 +186,30 @@ void relatorioPessoal(void){
 
 void adicionarItem(void){
   system("clear");
+
+  int validar1;
+  Item* itn;
+  char* produto;
+  itn = (Item*) malloc(sizeof(Item*));
+
   printf("========================================================\n");
   printf("==                   Adicionar Item                   ==\n");
   printf("========================================================\n");
-  printf("\n\t *Será exibido os dados do Individo, tais como: o que aconteceu durante a semana passada e será inibido uma meta, pelo bot, assim como também o usuário poderá criar as própias metas.\n");
-  printf("\n\n\t\033[0;32m>>Click Enter...\033[0m");
+  
+  printf("\n\n\tNome do item:");
+  scanf("%[^\n]",itn->nome);
   getchar();
+  printf("\n\tValidade do item:");
+  scanf("%[^\n]",itn->validade);
+  getchar();
+  printf("\n\tQuantidade:");
+  scanf("%[^\n]",itn->quantidade);
+  getchar();
+  printf("\n\tItem é perecivel?(s/n) ");
+  scanf("%c",itn->perecivel);
+  getchar();
+  printf("\n>>> Item Adicionado com sucesso!");
+  sleep(5);
 }
 
 
@@ -189,9 +219,7 @@ int userOptions(void){
   if(opc1 == 1){
     pegarItem();
     esc = selectionStorage();
-    // while ((esc != 0)&&(esc != 1)&&(esc != 2)&&(esc != 3)){
-    //   esc = selectionStorage();
-    // }
+
     if(esc == 1){
       storageGeladeira();
     }
@@ -206,9 +234,7 @@ int userOptions(void){
   if(opc1 == 2){
     descarte();
     esc = selectionStorage();
-    // while ((esc != 0)&&(esc != 1)&&(esc != 2)&&(esc != 3)){
-    //   esc = selectionStorage();
-    // }
+
     if(esc == 1){
       storageGeladeira();
     }

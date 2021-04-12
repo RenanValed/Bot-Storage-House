@@ -8,7 +8,7 @@
 int menubot(void){
   char opc[51];
   int minimo = 0, maximo = 4,validar1,validar2,opc1;
-  //system("clear");
+  system("clear");
   printf("========================================================\n");
   printf("==               Menu Bot Control                     ==\n");
   printf("========================================================\n");
