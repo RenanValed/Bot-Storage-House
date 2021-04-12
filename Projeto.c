@@ -22,52 +22,109 @@ void menuInicial(void);
 void login(void);
 void cadastrarUser(void);
 
+///////////////////////////////////////
+
 int main(void) {
     //menuSobre();
-    int opcao,logintype,opc;
+    char esc[256];
+    int validar1,validar2,opcao,logintype,opc;
     menuInicial();
-    scanf("%d",&opcao);
+    ///
+    scanf("%[^\n]",esc);
     getchar();
+    // validação para entrar apenas numeros
+    validar1 = validarStringNumerica(esc);
+    validar2 = 0;
+    if (!validar1){
+      opcao = converterEmInteiro(esc);
+      validar2 = validarMenu(opcao,0,2);
+    }
+    while(validar1 || validar2){
+      printf("\n\t¢ Opção Inválida!\n");
+      printf("\n\t→ Digite sua opção:\n");
+      scanf("%[^\n]",esc);
+      getchar();
+      validar1 = validarStringNumerica(esc);
+      if (!validar1){
+        opcao = converterEmInteiro(esc);
+        validar2 = validarMenu(opcao,0,2);
+      }
+    }//fim da validação
 
     while(opcao != 0){
-      while((opcao != 0)&&(opcao != 1)&&(opcao != 2)){
-        menuInicial();
-        printf("\n\t¢ OPÇÃO INVALIDA!\n\n\t→ Sua opção:\n");
-        
-        scanf("%d",&opcao);
-        getchar();
-      }
+      // sessão de cadastro
       if (opcao == 1){
         cadastrarUser();
       }
+      // sessão de login
       if(opcao == 2){
         login();
+        /////// escolha entre ADM e USER
         printf("\n\n\t→ Entrar como:\n\t1 - Morador\n\t0 - Bot\n\t→ ");
-        scanf("%d",&logintype);
+        scanf("%[^\n]",esc);
         getchar();
-        while((logintype != 1)&&(logintype != 0)){
-          printf("\n\n\t¢ Opção inválida!\n");
-          printf("\n\n\t→ Entrar como:\n\t1 - Morador\n\t0 - Bot\n\t→");
-          scanf("%d",&logintype);
+        // validação para entrar apenas numeros
+        validar1 = validarStringNumerica(esc); // retorna 1 se nao for apenas numeros
+        validar2 = 0;
+        if (!validar1){
+          logintype = converterEmInteiro(esc);
+          validar2 = validarMenu(logintype,0,1); // verificar se está no limite 0-1, caso esteja retorna 0
+        }
+        while(validar1 || validar2){
+          printf("\n\t¢ Opção Inválida!\n");
+          printf("\n\t→ Digite sua opção:\n");
+          scanf("%[^\n]",esc);
           getchar();
+          validar1 = validarStringNumerica(esc);
+          if (!validar1){
+            logintype = converterEmInteiro(esc);
+            validar2 = validarMenu(logintype,0,1);
+          }
+        }
+        // fim da validação
+      }
+      // Sessão de logar como morador
+      while (logintype == 1){
+        opc = userOptions() ;
+        if (opc == 0){
+          break;
         }
       }
-      while (logintype == 1 && opc != 0){
-        opc = userOptions() ;
-      }
-      while(logintype == 0 && opc != 0){
+      //logar como ADM
+      while(logintype == 0){
         opc = botOptions();
+        if (opc == 0){
+          break;
+        }
       }
+      // atualização para saber se continuar ou sair
       menuInicial();
-      scanf("%d",&opcao);
+      scanf("%[^\n]",esc);
       getchar();
+      // validação para entrar apenas numeros
+      validar1 = validarStringNumerica(esc);
+      validar2 = 0;
+      if (!validar1){
+        opcao = converterEmInteiro(esc);
+        validar2 = validarMenu(opcao,0,2);
+      }
+      while(validar1 || validar2){
+        printf("\n\t¢ Opção Inválida!\n");
+        printf("\n\t→ Digite sua opção:\n");
+        scanf("%[^\n]",esc);
+        getchar();
+        validar1 = validarStringNumerica(esc);
+        if (!validar1){
+          opcao = converterEmInteiro(esc);
+          validar2 = validarMenu(opcao,0,2);
+        }
+      }
+      //fim da validação
     }
     printf("\n\tFim do programa");
     return 0;
 
 }
-/// System ///
-
 
 /// Start ///
 void menuSobre(void) {
@@ -105,7 +162,6 @@ void menuSobre(void) {
 }
 
 void menuInicial(void){
-  //char opc;
   system("clear");
   printf("========================================================\n");
   printf("==                   Menu Inicial                     ==\n");
@@ -116,9 +172,6 @@ void menuInicial(void){
   printf("==    0- Sair                                         ==\n"); 
   printf("========================================================\n");
   printf("\n\t→ Sua opção:\n");
-  //scanf("%c",&opc);
-  //getchar();
-  //return opc;
 }
 
 void login(){

@@ -1,13 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include "funcoes.h"
 ///////////// Sobre o Bot////////////////
 
 
 int menubot(void){
   char opc[51];
-  int minimo = 0, maximo = 5,validar1,validar2,validar3,validar4,opc1;
-  system("clear");
+  int minimo = 0, maximo = 4,validar1,validar2,opc1;
+  //system("clear");
   printf("========================================================\n");
   printf("==               Menu Bot Control                     ==\n");
   printf("========================================================\n");
@@ -16,80 +17,104 @@ int menubot(void){
   printf("==    2- Atualizar Dados                              ==\n"); 
   printf("==    3- Relatório                                    ==\n"); 
   printf("==    4- Exibir Informações Atuais                    ==\n"); 
-  printf("==    5- Deletar Dados                                ==\n"); 
   printf("==    0- Voltar ao Menu principal                     ==\n"); 
   printf("========================================================\n");
   printf("\n\t→ Digite sua opção:\n");
   scanf("%[^\n]",opc);
   getchar();
-  validar1 = temLetra(opc);
-  validar2 = temEspaco(opc);
-  validar3 = verificarASCII_invalida(opc);
-  validar4 = 0;
-  if(!validar1 && !validar2 && !validar3){
+  validar1 = validarStringNumerica(opc);
+  validar2 = 0;
+  if(!validar1){
       opc1 = converterEmInteiro(opc);
-      validar4 = validarMenu(opc1,minimo,maximo);
+      validar2 = validarMenu(opc1,minimo,maximo);
     }
-  printf("v1: %d\n",validar1);// int var1 1
-  printf("v2: %d\n",validar2);// int var2 1
-  printf("v3: %d\n",validar3);// int var3 1
-  printf("v4: %d\n",validar4);// int var4 0 - minimo maximo
-  while (validar1 || validar2 || validar3 || validar4){
-    if (validar1){
-      printf("\n\t¢ Você usou letras!");
-    }
-    if(validar2){
-      printf("\n\t¢ Você usou espaco!");
-    }
+  while (validar1 || validar2){
     printf("\n\t¢ Opção Invalida!\n");
     printf("\n\t→ Digite sua opção:\n");
     scanf("%[^\n]",opc);
     getchar();
-    validar1 = temLetra(opc);
-    validar2 = temEspaco(opc);
-    validar3 = verificarASCII_invalida(opc);
-    if(!validar1 && !validar2 && !validar3){
+    validar1 = validarStringNumerica(opc);
+    if(!validar1){
       opc1 = converterEmInteiro(opc);
-      validar4 = validarMenu(opc1,minimo,maximo);
+      validar2 = validarMenu(opc1,minimo,maximo);
     }
-    printf("v1: %d\n",validar1);
-    printf("v2: %d\n",validar2);
-    printf("v3: %d\n",validar3);
-    printf("v4: %d\n",validar4);
   }
   
   return opc1;
 }
 
 void configBot(void){
-  int qntPets,qntFrutas,qntRefeicao,feirasMensais,validar;
-  char qntMoradores[51];
+  int validar;
+  char qntMoradores[51],qntPets[51],qntFrutas[51],qntRefeicao[51],feirasMensais[51];
   system("clear");
   printf("========================================================\n");
   printf("==                  Personalizar Bot                  ==\n");
   printf("========================================================\n");
   printf("\t → Quantas pessoas moram na casa?\n");
-  scanf("%s",qntMoradores);
+  scanf("%[^\n]",qntMoradores);
   getchar();
-  validar = temDigito(qntMoradores);
+  validar = validarStringNumerica(qntMoradores);
   while(!validar){
     printf("\t → Quantas pessoas moram na casa?\n");
     scanf("%s",qntMoradores);
     getchar();
-    validar = temDigito(qntMoradores);
+    validar = validarStringNumerica(qntMoradores);
   }
+  printf("\n\t~Dado cadastrado!");
+  sleep(3);
+  system("clear");
   printf("\t → Quantos animais há na casa?\n");
-  scanf("%d",&qntPets);
+  scanf("%[^\n]",qntPets);
   getchar();
+  validar = validarStringNumerica(qntPets);
+  while(!validar){
+    printf("\t → Quantos animais há na casa?\n");
+    scanf("%[^\n]",qntPets);
+    getchar();
+    validar = validarStringNumerica(qntPets);
+  }
+  printf("\n\t~Dado cadastrado!");
+  sleep(3);
+  system("clear");
   printf("\t → Quantas frutas são consumidas por dia pela casa?\n");
-  scanf("%d",&qntFrutas);
+  scanf("%[^\n]",qntFrutas);
   getchar();
+  validar = validarStringNumerica(qntPets);
+  while(!validar){
+    printf("\t → Quantas frutas são consumidas por dia pela casa?\n");
+    scanf("%[^\n]",qntFrutas);
+    getchar();
+    validar = validarStringNumerica(qntFrutas);
+  }
+  printf("\n\t~Dado cadastrado!");
+  sleep(3);
+  system("clear");
   printf("\t → Quantas refeições são feitas ai dia?\n");
-  scanf("%d",&qntRefeicao);
+  scanf("%[^\n]",qntRefeicao);
   getchar();
+  validar = validarStringNumerica(qntRefeicao);
+  while(!validar){
+    printf("\t → Quantas refeições são feitas ai dia?\n");
+    scanf("%[^\n]",qntRefeicao);
+    getchar();
+    validar = validarStringNumerica(qntRefeicao);
+  }
+  printf("\n\t~Dado cadastrado!");
+  sleep(3);
+  system("clear");
   printf("\t → Quantas feiras são feitas ao mes?\n");
-  scanf("%d",&feirasMensais);
+  scanf("%[^\n]",feirasMensais);
   getchar();
+  validar = validarStringNumerica(feirasMensais);
+  while(!validar){
+    printf("\t → Quantas feiras são feitas ao mes?\n");
+    scanf("%[^\n]",feirasMensais);
+    getchar();
+    validar = validarStringNumerica(feirasMensais);
+  }
+  printf("\n\t~Dado cadastrado!");
+  sleep(3);
+  system("clear");
 }
 
 char atualizarBot(void){

@@ -6,5 +6,5 @@ void descarte(void);
 void storageArmario(void);
 void storageGeladeira(void);
 void storageFreezer(void);
-void weekGoal(void);
+void adicionarItem(void);
 void relatorioPessoal(void);
