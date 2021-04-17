@@ -166,3 +166,4 @@ int validarPalavra(char palavra[]){ // retorna 1 caso não seja apenas letras
   }
   return 0;
 }
+

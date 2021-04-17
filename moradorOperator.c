@@ -5,14 +5,6 @@
 #include "botOperator.h"
 #include "funcoes.h"
 
-struct item{
-  char nome[81];
-  char validade[10];
-  int quantidade;
-  char perecivel;
-};
-
-typedef struct item Item;
 
 //////////////// Sobre o morador ///////////////
 
@@ -29,7 +21,7 @@ int menuMorador(void){
   printf("==    2- Descartar item                               ==\n"); //ok
   printf("==    3- Meu Relatório                                ==\n"); //ok
   printf("==    4- Relatório da Casa                            ==\n"); //ok
-  printf("==    5- Adicionar item                               ==\n"); //
+  printf("==    5- Adicionar item                               ==\n"); //ok
   printf("==    0- Voltar ao Menu principal                     ==\n"); 
   printf("========================================================\n"); 
   printf("\n\t→ Digite sua opção:\n");
@@ -186,10 +178,7 @@ void relatorioPessoal(void){
 
 void adicionarItem(void){
   system("clear");
-
-  int validar1;
   Item* itn;
-  char* produto;
   itn = (Item*) malloc(sizeof(Item*));
 
   printf("========================================================\n");
@@ -203,16 +192,118 @@ void adicionarItem(void){
   scanf("%[^\n]",itn->validade);
   getchar();
   printf("\n\tQuantidade:");
-  scanf("%[^\n]",itn->quantidade);
+  scanf("%d",&itn->quantidade);
   getchar();
   printf("\n\tItem é perecivel?(s/n) ");
-  scanf("%c",itn->perecivel);
+  scanf("%c",&itn->perecivel);
   getchar();
+  itn->status = True;
   printf("\n>>> Item Adicionado com sucesso!");
   sleep(5);
 }
 
+void gravarItem(Item* itn) { // Grava struct em arqivo binário
+  FILE* fp;
 
+  fp = fopen("itens.dat", "ab");
+  if (fp == NULL) {
+    printf("Ops! Ocorreu um erro na abertura do arquivo!\n");
+    printf("Não é possível continuar este programa...\n");
+    exit(1);
+  }
+  fwrite(itn, sizeof(Item), 1, fp);
+  fclose(fp);
+}
+
+
+Item* buscarItem(char* nym) { // busca Item no Arqruivo e retorna-o
+  FILE* fp;
+  Item* itn;
+
+  itn = (Item*) malloc(sizeof(Item));
+  fp = fopen("Itens.dat", "rb");
+  if (fp == NULL) {
+    printf("Ops! Ocorreu um erro na abertura do arquivo!\n");
+    printf("Não é possível continuar este programa...\n");
+    exit(1);
+  }
+  while(!feof(fp)) {
+    fread(itn, sizeof(Item), 1, fp);
+    if (strcmp(itn->nome, nym) == 0) {
+      fclose(fp);
+      return itn;
+    }
+  }
+  fclose(fp);
+  return NULL;
+}
+
+
+void regravarItem(Item* itn) {
+	FILE* fp;
+	Item* itemLido;
+
+	itemLido = (Item*) malloc(sizeof(Item));
+	fp = fopen("itens.dat", "r+b");
+	if (fp == NULL) {
+		printf("\n\t==================================");
+    printf("\n\t====  Erro ao abrir arquivo   ====");
+    printf("\n\t==================================");
+    sleep(3);
+	}
+	while(fread(itemLido, sizeof(Item), 1, fp)) {
+		if (strcmp(itemLido->nome, itn->nome) == 0) {
+			fseek(fp, -1*sizeof(Item), SEEK_CUR);
+      fwrite(itn, sizeof(Item), 1, fp);
+      printf("\n\t###  Arquivo atualizado!  ###");
+      break;
+		}
+	}
+	fclose(fp);
+	free(itemLido);
+}
+
+void exibirItem(Item* itn) { //Exibe item pesquisado por usuário
+
+  if (itn == NULL) {
+    printf("\n= = = Item Inexistente = = =\n");
+  } else {
+    printf("\n= = = Item Cadastrado = = =\n");
+    printf("Item: %s\n", itn->nome);
+    printf("Quantidade: %d\n", itn->quantidade);
+    printf("validade: %s\n", itn->validade);
+    printf("Perecível: %c\n", itn->perecivel);
+  }
+  printf("\n\nTecle ENTER para continuar!\n\n");
+  getchar();
+}
+
+void exibirTodosItens (void){// Exibe todos os itens do Arquivo bin
+  FILE* fp;
+  Item* itemLido;
+
+  itemLido = (Item*) malloc(sizeof(Item));
+  fp = fopen("itens.bin","rb");
+  if (fp == NULL){
+		printf("\n\t==================================");
+    printf("\n\t====  Erro ao abrir arquivo   ====");
+    printf("\n\t==================================");
+    sleep(3);
+  }
+  while(fread(itemLido, sizeof(Item), 1, fp)){
+    if(itemLido->status){
+      exibirItem(itemLido);
+    }
+
+  }
+  
+  free(itemLido);
+}
+
+
+
+
+///////////////////////////////////////////////////
 int userOptions(void){
   int opc1,esc;  
   opc1 = menuMorador();

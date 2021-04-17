@@ -9,3 +9,5 @@ int validarMenu(int,int,int);// Verifica se a opção digitada está dentro do l
 int validarStringNumerica(char[]);//Valida se foi digitado apenas numeros sem espaços
 int tamanhoZero(char[]);//Verifica se o tamanho da sting é zero
 int validarPalavra(char[]);//Verifica se a entrada é palavra sem acentos
+#define True 1;
+#define False 0;

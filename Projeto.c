@@ -16,7 +16,6 @@
 #include "funcoes.h"
 
 // Inicialização
-void sistemaBSH(void);
 void menuSobre(void);
 void menuInicial(void);
 void login(void);
@@ -56,6 +55,7 @@ int main(void) {
       if (opcao == 1){
         cadastrarUser();
       }
+      
       // sessão de login
       if(opcao == 2){
         login();
@@ -83,6 +83,7 @@ int main(void) {
         }
         // fim da validação
       }
+
       // Sessão de logar como morador
       while (logintype == 1){
         opc = userOptions() ;
@@ -90,6 +91,7 @@ int main(void) {
           break;
         }
       }
+
       //logar como ADM
       while(logintype == 0){
         opc = botOptions();
@@ -97,10 +99,12 @@ int main(void) {
           break;
         }
       }
+
       // atualização para saber se continuar ou sair
       menuInicial();
       scanf("%[^\n]",esc);
       getchar();
+
       // validação para entrar apenas numeros
       validar1 = validarStringNumerica(esc);
       validar2 = 0;
