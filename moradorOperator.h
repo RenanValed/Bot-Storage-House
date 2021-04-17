@@ -3,9 +3,9 @@ int menuMorador(void);
 int selectionStorage(void);
 void pegarItem(void);
 void descarte(void);
-void storageArmario(void);
-void storageGeladeira(void);
-void storageFreezer(void);
+int storageArmario(void);
+int storageGeladeira(void);
+int storageFreezer(void);
 void adicionarItem(void);
 void relatorioPessoal(void);
 

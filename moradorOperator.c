@@ -82,7 +82,7 @@ int selectionStorage(void){
   return opc;
 }
 
-void storageGeladeira(void){
+int storageGeladeira(void){
   char esc[256];
   int validar1;
   system("clear");
@@ -101,12 +101,13 @@ void storageGeladeira(void){
     getchar();
     validar1 = validarStringNumerica(esc);
   }
+  int num = converterEmInteiro(esc);
+  return num;
 }
 
-void storageArmario(void){
+int storageArmario(void){
   char esc[256];
   int validar1;
-  Item* itn;
   system("clear");
   printf("========================================================\n");
   printf("==                        Armário                     ==\n");
@@ -123,9 +124,11 @@ void storageArmario(void){
     getchar();
     validar1 = validarStringNumerica(esc);
   }
+  int num = converterEmInteiro(esc);
+  return num;
 }
 
-void storageFreezer(void){
+int storageFreezer(void){
   char esc[256];
   int validar1;
   system("clear");
@@ -144,10 +147,17 @@ void storageFreezer(void){
     getchar();
     validar1 = validarStringNumerica(esc);
   }
+  int num = converterEmInteiro(esc);
+  return num;
 }
 
 void pegarItem(void){
-  int esc;
+  int esc, num,x,achou = 1;
+  Item* itn;
+  FILE* fp;
+  fp = fopen("itens.dat","r+b");
+  itn = (Item*) malloc(sizeof(Item));
+
   system("clear");
   printf("========================================================\n");
   printf("==                      Pegar item                    ==\n");
@@ -155,21 +165,98 @@ void pegarItem(void){
   esc = selectionStorage();
 
   if(esc == 1){
-    storageGeladeira();
+    num = storageGeladeira();
+    while(fread(itn, sizeof(Item), 1, fp)){
+      if (itn->status == 1){
+        if (achou == num){
+          x = itn->quantidade;
+          itn->quantidade = x - 1;
+          regravarItem(itn);
+        }
+        achou +=1;
+      }
+    }
   }
   if(esc == 2){
-    storageArmario();
+    num = storageArmario();
+    while(fread(itn, sizeof(Item), 1, fp)){
+      if (itn->status == 1){
+        if (achou == num){
+          x = itn->quantidade;
+          itn->quantidade = x - 1;
+          regravarItem(itn);
+        }
+        achou +=1;
+      }
+    }
   }
   if(esc == 3){
-    storageFreezer();
+    num = storageFreezer();
+    while(fread(itn, sizeof(Item), 1, fp)){
+      if (itn->status == 1){
+        if (achou == num){
+          x = itn->quantidade;
+          itn->quantidade = x - 1;
+          regravarItem(itn);
+        }
+        achou +=1;
+      }
+    }
   }
+  free(itn);
+  fclose(fp);
 }
 
 void descarte(void){
   system("clear");
+  int esc,num,achou = 1;
+  FILE* fp;
+  Item* itn;
+  itn = (Item*) malloc(sizeof(Item));
+  fp = fopen("itens.dat","r+b");
   printf("========================================================\n");
   printf("==                  Descartar item                    ==\n");
   printf("========================================================\n");
+  esc = selectionStorage();
+
+  if(esc == 1){
+    num = storageGeladeira();
+    while(fread(itn, sizeof(Item), 1, fp)){
+      if (itn->status == 1){
+        if (achou == num){
+          itn->status = False;
+          regravarItem(itn);
+        }
+        achou +=1;
+      }
+    }
+  }
+  if(esc == 2){
+    num = storageArmario();
+    while(fread(itn, sizeof(Item), 1, fp)){
+      if (itn->status == 1){
+        if (achou == num){
+          itn->status = False;
+          regravarItem(itn);
+        }
+        achou +=1;
+      }
+    }
+  }
+  if(esc == 3){
+    num = storageFreezer();
+    while(fread(itn, sizeof(Item), 1, fp)){
+      if (itn->status == 1){
+        if (achou == num){
+          itn->status = False;
+          regravarItem(itn);
+        }
+        achou +=1;
+      }
+    }
+  }
+  free(itn);
+  fclose(fp);
 }
 
 void relatorioPessoal(void){
@@ -280,6 +367,7 @@ void regravarItem(Item* itn) {
 	free(itemLido);
 }
 
+
 void exibirItem(Item* itn) { //Exibe item pesquisado por usuário
 
   if (itn == NULL) {
@@ -328,27 +416,16 @@ void exibirTodosItens (void){// Exibe todos os itens do Arquivo bin
 
 ///////////////////////////////////////////////////
 int userOptions(void){
-  int opc1,esc;  
+  int opc1;  
   opc1 = menuMorador();
   if(opc1 == 1){
     pegarItem();
     
   }
   if(opc1 == 2){
-    descarte();
-    esc = selectionStorage();
-
-    if(esc == 1){
-      storageGeladeira();
-    }
-    if(esc == 2){
-      storageArmario();
-    }
-    if(esc == 3){
-      storageFreezer();
-    }
-    
+    descarte(); 
   }
+
   if(opc1 == 3){
     relatorioPessoal();
   }
