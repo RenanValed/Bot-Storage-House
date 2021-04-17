@@ -152,7 +152,7 @@ int storageFreezer(void){
 }
 
 void pegarItem(void){
-  int esc, num,x,achou = 1;
+  int esc, num,x,achou = 1,n;
   Item* itn;
   FILE* fp;
   fp = fopen("itens.dat","r+b");
@@ -169,6 +169,9 @@ void pegarItem(void){
     while(fread(itn, sizeof(Item), 1, fp)){
       if (itn->status == 1){
         if (achou == num){
+          if (x = tela_acabouItem(itn)){
+            break;
+          }
           x = itn->quantidade;
           itn->quantidade = x - 1;
           regravarItem(itn);
@@ -182,6 +185,9 @@ void pegarItem(void){
     while(fread(itn, sizeof(Item), 1, fp)){
       if (itn->status == 1){
         if (achou == num){
+          if (x = tela_acabouItem(itn)){
+            break;
+          }
           x = itn->quantidade;
           itn->quantidade = x - 1;
           regravarItem(itn);
@@ -195,6 +201,9 @@ void pegarItem(void){
     while(fread(itn, sizeof(Item), 1, fp)){
       if (itn->status == 1){
         if (achou == num){
+          if (x = tela_acabouItem(itn)){
+            break;
+          }
           x = itn->quantidade;
           itn->quantidade = x - 1;
           regravarItem(itn);
@@ -307,6 +316,18 @@ void adicionarItem(void){
 
   printf("\n>>> Item Adicionado com sucesso!");
   sleep(5);
+}
+
+int tela_acabouItem(Item* itn){
+  int n = 0;
+  if(itn->quantidade == 0){
+    printf("Item acabou no estoque!");
+    sleep(3);
+    system("clear");
+    n = 1;
+    return n;
+  }
+  return n;
 }
 
 void gravarItem(Item* itn) { // Grava struct em arqivo binário

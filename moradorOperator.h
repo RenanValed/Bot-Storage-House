@@ -9,6 +9,8 @@ int storageFreezer(void);
 void adicionarItem(void);
 void relatorioPessoal(void);
 
+
+
 struct item_estrutura{
   char nome[81];
   char validade[10];
@@ -18,6 +20,8 @@ struct item_estrutura{
 };
 
 typedef struct item_estrutura Item;
+
+int tela_acabouItem(Item*);
 // Funçoes para Arquivo binário
 void gravarItem(Item*);
 Item* buscarItem(char*);
