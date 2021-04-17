@@ -89,7 +89,7 @@ void storageGeladeira(void){
   printf("========================================================\n");
   printf("==                      Geladeira                     ==\n");
   printf("========================================================\n"); 
-  printf(" \n\t*Será exibido a lista com todos os itens do estoque*");
+  exibirTodosItens();
   printf("\n\t→ Digite sua opção:\n");
   scanf("%[^\n]",esc);
   getchar();
@@ -106,51 +106,63 @@ void storageGeladeira(void){
 void storageArmario(void){
   char esc[256];
   int validar1;
+  Item* itn;
   system("clear");
   printf("========================================================\n");
   printf("==                        Armário                     ==\n");
   printf("========================================================\n"); 
-  printf(" \n\t*Será exibido a lista com todos os itens do estoque*");
+  exibirTodosItens();
   printf("\n\t→ Digite sua opção:\n");
   scanf("%[^\n]",esc);
   getchar();
   validar1 = validarStringNumerica(esc);
-  // validar2 = 0
-  // if (!validar1){
-  //   validar2 = validarMenu(esc);
-  // }
   while(validar1){
     printf("\n\t¢ Opção Inválida!\n");
     printf("\n\t→ Digite sua opção:\n");
     scanf("%[^\n]",esc);
     getchar();
     validar1 = validarStringNumerica(esc);
-    // if (!validar1){
-    //   validar2 = validarMenu(esc);
-    // }
   }
-  // opc = converterEmInteiro(esc);
-  // return opc;
 }
 
 void storageFreezer(void){
-  char opc[256];
+  char esc[256];
+  int validar1;
   system("clear");
   printf("========================================================\n");
   printf("==                       Freezer                      ==\n");
   printf("========================================================\n"); 
-  printf(" \n\t*Será exibido a lista com todos os itens do estoque*");
+  exibirTodosItens();
   printf("\n\t→ Digite sua opção:\n");
-  scanf("%s",opc);
+  scanf("%[^\n]",esc);
   getchar();
+  validar1 = validarStringNumerica(esc);
+  while(validar1){
+    printf("\n\t¢ Opção Inválida!\n");
+    printf("\n\t→ Digite sua opção:\n");
+    scanf("%[^\n]",esc);
+    getchar();
+    validar1 = validarStringNumerica(esc);
+  }
 }
 
 void pegarItem(void){
+  int esc;
   system("clear");
   printf("========================================================\n");
   printf("==                      Pegar item                    ==\n");
   printf("========================================================\n");
+  esc = selectionStorage();
 
+  if(esc == 1){
+    storageGeladeira();
+  }
+  if(esc == 2){
+    storageArmario();
+  }
+  if(esc == 3){
+    storageFreezer();
+  }
 }
 
 void descarte(void){
@@ -286,7 +298,7 @@ void exibirItem(Item* itn) { //Exibe item pesquisado por usuário
 void exibirTodosItens (void){// Exibe todos os itens do Arquivo bin
   FILE* fp;
   Item* itemLido;
-
+  int num = 1;
   itemLido = (Item*) malloc(sizeof(Item));
   fp = fopen("itens.dat","rb");
   if (fp == NULL){
@@ -295,13 +307,19 @@ void exibirTodosItens (void){// Exibe todos os itens do Arquivo bin
     printf("\n\t==================================");
     sleep(3);
   }
+
   while(fread(itemLido, sizeof(Item), 1, fp)){
     if(itemLido->status){
-      exibirItem(itemLido);
+      printf("\n= = = %dº Item Cadastrado = = =\n",num);
+      printf("Item: %s\n", itemLido->nome);
+      printf("Quantidade: %d\n", itemLido->quantidade);
+      printf("validade: %s\n", itemLido->validade);
+      printf("Perecível: %c\n", itemLido->perecivel);
+      num += 1;
     }
-
   }
   
+
   free(itemLido);
 }
 
@@ -314,17 +332,6 @@ int userOptions(void){
   opc1 = menuMorador();
   if(opc1 == 1){
     pegarItem();
-    esc = selectionStorage();
-
-    if(esc == 1){
-      storageGeladeira();
-    }
-    if(esc == 2){
-      storageArmario();
-    }
-    if(esc == 3){
-      storageFreezer();
-    }
     
   }
   if(opc1 == 2){
