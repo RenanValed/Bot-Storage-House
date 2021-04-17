@@ -4,6 +4,7 @@
 #include <string.h>
 #include "botOperator.h"
 #include "funcoes.h"
+#include "moradorOperator.h"
 
 
 //////////////// Sobre o morador ///////////////
@@ -93,19 +94,12 @@ void storageGeladeira(void){
   scanf("%[^\n]",esc);
   getchar();
   validar1 = validarStringNumerica(esc);
-  // validar2 = 0
-  // if (!validar1){
-  //   validar2 = validarMenu(esc,minimo,maximo);
-  // }
   while(validar1 ){
     printf("\n\t¢ Opção Inválida!\n");
     printf("\n\t→ Digite sua opção:\n");
     scanf("%[^\n]",esc);
     getchar();
     validar1 = validarStringNumerica(esc);
-    // if (!validar1){
-    //   validar2 = validarMenu(esc);
-    // }
   }
 }
 
@@ -179,7 +173,8 @@ void relatorioPessoal(void){
 void adicionarItem(void){
   system("clear");
   Item* itn;
-  itn = (Item*) malloc(sizeof(Item*));
+  itn = (Item*) malloc(sizeof(Item));
+  FILE* fp;
 
   printf("========================================================\n");
   printf("==                   Adicionar Item                   ==\n");
@@ -189,7 +184,7 @@ void adicionarItem(void){
   scanf("%[^\n]",itn->nome);
   getchar();
   printf("\n\tValidade do item:");
-  scanf("%[^\n]",itn->validade);
+  scanf("%s",itn->validade);
   getchar();
   printf("\n\tQuantidade:");
   scanf("%d",&itn->quantidade);
@@ -198,6 +193,19 @@ void adicionarItem(void){
   scanf("%c",&itn->perecivel);
   getchar();
   itn->status = True;
+
+  fp = fopen("itens.dat","ab"); //gravação em arquivo
+  if (fp == NULL){
+    printf("\n\t==================================");
+    printf("\n\t====  Erro ao abrir arquivo   ====");
+    printf("\n\t==================================");
+    sleep(3);
+
+  }
+  fwrite(itn,sizeof(Item),1,fp);
+  fclose(fp);
+  free(itn);
+
   printf("\n>>> Item Adicionado com sucesso!");
   sleep(5);
 }
@@ -246,10 +254,7 @@ void regravarItem(Item* itn) {
 	itemLido = (Item*) malloc(sizeof(Item));
 	fp = fopen("itens.dat", "r+b");
 	if (fp == NULL) {
-		printf("\n\t==================================");
-    printf("\n\t====  Erro ao abrir arquivo   ====");
-    printf("\n\t==================================");
-    sleep(3);
+
 	}
 	while(fread(itemLido, sizeof(Item), 1, fp)) {
 		if (strcmp(itemLido->nome, itn->nome) == 0) {
@@ -283,7 +288,7 @@ void exibirTodosItens (void){// Exibe todos os itens do Arquivo bin
   Item* itemLido;
 
   itemLido = (Item*) malloc(sizeof(Item));
-  fp = fopen("itens.bin","rb");
+  fp = fopen("itens.dat","rb");
   if (fp == NULL){
 		printf("\n\t==================================");
     printf("\n\t====  Erro ao abrir arquivo   ====");

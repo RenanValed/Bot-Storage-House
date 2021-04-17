@@ -9,7 +9,7 @@ void storageFreezer(void);
 void adicionarItem(void);
 void relatorioPessoal(void);
 
-struct item{
+struct item_estrutura{
   char nome[81];
   char validade[10];
   int quantidade;
@@ -17,7 +17,7 @@ struct item{
   int status;
 };
 
-typedef struct item Item;
+typedef struct item_estrutura Item;
 // Funçoes para Arquivo binário
 void gravarItem(Item*);
 Item* buscarItem(char*);
