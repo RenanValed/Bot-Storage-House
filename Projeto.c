@@ -58,11 +58,12 @@ int main(void) {
       // sessão de login
       if(opcao == 2){
         login();
-
-      while (opc != 0){
-        opc = userOptions() ;
       }
+      do{
+        opc = userOptions();   
+      }while(opc != 0);
       
+
       // atualização para saber se continuar ou sair
       menuInicial();
       scanf("%[^\n]",esc);
@@ -87,7 +88,7 @@ int main(void) {
         }
       }
       //fim da validação
-    }
+    } 
     printf("\n\tFim do programa");
     return 0;
 

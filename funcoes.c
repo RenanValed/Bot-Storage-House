@@ -45,7 +45,7 @@ int temLetra(char palavra[]){ // retorna 1 se houver letra no vetor
     return 0;
   }
   tam = strlen(palavra);
-  for (int num = 0; num < tam;num++){a
+  for (int num = 0; num < tam;num++){
     letra = palavra[num];
     if ((letra >= 'a' && letra <='z')||(letra >= 'A' && letra <='Z')) {
       return 1;
