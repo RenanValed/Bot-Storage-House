@@ -11,7 +11,6 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
-#include "botOperator.h"
 #include "moradorOperator.h"
 #include "funcoes.h"
 
@@ -59,47 +58,11 @@ int main(void) {
       // sessão de login
       if(opcao == 2){
         login();
-        /////// escolha entre ADM e USER
-        printf("\n\n\t→ Entrar como:\n\t1 - Morador\n\t0 - Bot\n\t→ ");
-        scanf("%[^\n]",esc);
-        getchar();
-        // validação para entrar apenas numeros
-        validar1 = validarStringNumerica(esc); // retorna 1 se nao for apenas numeros
-        validar2 = 0;
-        if (!validar1){
-          logintype = converterEmInteiro(esc);
-          validar2 = validarMenu(logintype,0,1); // verificar se está no limite 0-1, caso esteja retorna 0
-        }
-        while(validar1 || validar2){
-          printf("\n\t¢ Opção Inválida!\n");
-          printf("\n\t→ Digite sua opção:\n");
-          scanf("%[^\n]",esc);
-          getchar();
-          validar1 = validarStringNumerica(esc);
-          if (!validar1){
-            logintype = converterEmInteiro(esc);
-            validar2 = validarMenu(logintype,0,1);
-          }
-        }
-        // fim da validação
-      }
 
-      // Sessão de logar como morador
-      while (logintype == 1){
+      while (opc != 0){
         opc = userOptions() ;
-        if (opc == 0){
-          break;
-        }
       }
-
-      //logar como ADM
-      while(logintype == 0){
-        opc = botOptions();
-        if (opc == 0){
-          break;
-        }
-      }
-
+      
       // atualização para saber se continuar ou sair
       menuInicial();
       scanf("%[^\n]",esc);

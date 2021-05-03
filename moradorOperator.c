@@ -2,9 +2,13 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
-#include "botOperator.h"
 #include "funcoes.h"
 #include "moradorOperator.h"
+
+
+//fazer separação de estoques
+//criar arquivo para usuários
+// deletar menu bot
 
 
 //////////////// Sobre o morador ///////////////
@@ -428,12 +432,21 @@ void exibirTodosItens (void){// Exibe todos os itens do Arquivo bin
     }
   }
   
-
+  fclose(fp);
   free(itemLido);
 }
 
 
 
+void relatorioGeral(void){
+  system("clear");
+  printf("========================================================\n");
+  printf("==                    Relatório Geral                 ==\n");
+  printf("========================================================\n");
+  printf("\n\t *Será exibido os dados Gerais, tais como: entradas, saidas, sobras e dicas para economizar no próximo mês*\n");
+  printf("\n\n\t\033[1;32m>>Click Enter...\033[0m");
+  getchar();
+}
 
 ///////////////////////////////////////////////////
 int userOptions(void){

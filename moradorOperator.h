@@ -8,6 +8,7 @@ int storageGeladeira(void);
 int storageFreezer(void);
 void adicionarItem(void);
 void relatorioPessoal(void);
+void relatorioGeral(void);
 
 
 
