@@ -27,7 +27,7 @@ int menuMorador(void){
   printf("==    3- Exibir estoque completo                      ==\n"); //
   printf("==    4- Relatório da Casa                            ==\n"); //
   printf("==    5- Adicionar item                               ==\n"); //
-  printf("==    0- Voltar ao Menu principal                     ==\n"); 
+  printf("==    0- Encerrar                                     ==\n"); 
   printf("========================================================\n"); 
   printf("\n\t→ Digite sua opção:\n");
   scanf("%[^\n]",entrada);
@@ -284,6 +284,7 @@ void relatorioPessoal(void){
 
 void adicionarItem(void){
   system("clear");
+  char vet[11];
   Item* itn;
   itn = (Item*) malloc(sizeof(Item));
   FILE* fp;
@@ -296,8 +297,12 @@ void adicionarItem(void){
   scanf("%[^\n]",itn->nome);
   getchar();
   printf("\n\tValidade do item:");
-  scanf("%s",itn->validade);
-  getchar();
+  do{
+    scanf("%s",vet);
+    getchar();
+  }while(formaData(vet) || !validarData(vet));
+  printf("\n\t>>> Aperte enter ...");
+  scanf(vet, itn->validade);
   printf("\n\tQuantidade:");
   scanf("%d",&itn->quantidade);
   getchar();
@@ -311,15 +316,14 @@ void adicionarItem(void){
     printf("\n\t==================================");
     printf("\n\t====  Erro ao abrir arquivo   ====");
     printf("\n\t==================================");
-    sleep(3);
+    sleep(2);
 
   }
   fwrite(itn,sizeof(Item),1,fp);
   fclose(fp);
   free(itn);
 
-  printf("\n>>> Item Adicionado com sucesso!");
-  sleep(5);
+  printf("\n>>> Item Adicionado com sucesso!\n");
 }
 
 int tela_acabouItem(Item* itn){
