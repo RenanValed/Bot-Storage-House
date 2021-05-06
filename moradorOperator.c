@@ -24,7 +24,7 @@ int menuMorador(void){
   printf("==                                                    ==\n");
   printf("==    1- Pegar item                                   ==\n"); //ok
   printf("==    2- Descartar item                               ==\n"); //ok
-  printf("==    3- Exibir estoque completo                      ==\n"); //
+  printf("==    3- Exibir estoque completo                      ==\n"); //ok
   printf("==    4- Relatório da Casa                            ==\n"); //
   printf("==    5- Adicionar item                               ==\n"); //
   printf("==    0- Encerrar                                     ==\n"); 
@@ -89,15 +89,50 @@ int selectionStorage(void){
 int storageGeladeira(void){
   char esc[256];
   int validar1;
+  int n = 1,m = 0;
+  FILE *fp;
+  Item *itemLido;
+  itemLido = (Item*) malloc(sizeof(Item));
   system("clear");
   printf("========================================================\n");
   printf("==                      Geladeira                     ==\n");
   printf("========================================================\n"); 
-  exibirTodosItens();
+  fp = fopen("itens.dat","rb");
+  if(fp == NULL){
+    printf("\nArquivo Criado");
+    fp = fopen("itens.dat","wb");
+  }
+  else{
+    while(fread(itemLido, sizeof(Item), 1, fp)){
+      if(itemLido->status){
+        if(itemLido->local == 'g'){
+          printf("\n= = = %dº Item Cadastrado = = =\n",n);
+          printf("Item: %s\n", itemLido->nome);
+          printf("Quantidade: %d\n", itemLido->quantidade);
+          printf("validade: %s\n", itemLido->validade);
+          printf("Perecível: ");
+          if(itemLido->perecivel == 's'){
+            printf("Sim\n");
+          }
+          else{
+            printf("Não\n");
+          }
+          printf("Local: Geladeira\n");
+          n += 1;
+          m +=1;
+        }
+      }
+    }  
+  }
+  if((m ==0)&&(n == 1)){
+    printf("\nNão há itens nesse local!");
+    return 0;
+    }
   printf("\n\t→ Digite sua opção:\n");
   scanf("%[^\n]",esc);
   getchar();
   validar1 = validarStringNumerica(esc);
+  
   while(validar1 ){
     printf("\n\t¢ Opção Inválida!\n");
     printf("\n\t→ Digite sua opção:\n");
@@ -106,17 +141,70 @@ int storageGeladeira(void){
     validar1 = validarStringNumerica(esc);
   }
   int num = converterEmInteiro(esc);
+  int x, achou = 1;
+  free(itemLido);
+  itemLido = (Item*) malloc(sizeof(Item));
+  fclose(fp);
+  fp = fopen("itens.dat","rb");
+  while(fread(itemLido, sizeof(Item), 1, fp)){
+    if (itemLido->status == 1 && itemLido->local == 'g'){
+      if (achou == num){
+        if (tela_acabouItem(itemLido)){
+          break;
+        }
+        x = itemLido->quantidade;
+        itemLido->quantidade = x - 1;
+        regravarItem(itemLido);
+      }
+      achou +=1;
+    }
+  }
+  free(itemLido);
+  fclose(fp);
   return num;
 }
 
 int storageArmario(void){
   char esc[256];
   int validar1;
+  int n = 1,m = 0;
+  FILE *fp;
+  Item *itemLido;
+  itemLido = (Item*) malloc(sizeof(Item));
   system("clear");
   printf("========================================================\n");
   printf("==                        Armário                     ==\n");
   printf("========================================================\n"); 
-  exibirTodosItens();
+  
+  fp = fopen("itens.dat","rb");
+  if(fp == NULL){
+    printf("\nArquivo Criado");
+    fp = fopen("itens.dat","wb");
+  }
+  else{
+    while(fread(itemLido, sizeof(Item), 1, fp)){
+      if((itemLido->local == 'a') && (itemLido->status)){
+        printf("\n= = = %dº Item Cadastrado = = =\n",n);
+        printf("Item: %s\n", itemLido->nome);
+        printf("Quantidade: %d\n", itemLido->quantidade);
+        printf("validade: %s\n", itemLido->validade);
+        printf("Perecível: ");
+        if(itemLido->perecivel == 's'){
+          printf("Sim\n");
+        }
+        else{
+          printf("Não\n");
+        }
+        printf("Local: Armário\n");
+        n +=1;
+        m +=1;
+      }
+    }     
+  }
+  if((m ==0)&&(n == 1)){
+      printf("\nNão há itens nesse local!");
+      return 0;
+    }
   printf("\n\t→ Digite sua opção:\n");
   scanf("%[^\n]",esc);
   getchar();
@@ -129,17 +217,68 @@ int storageArmario(void){
     validar1 = validarStringNumerica(esc);
   }
   int num = converterEmInteiro(esc);
+  int x, achou = 1;
+  free(itemLido);
+  itemLido = (Item*) malloc(sizeof(Item));
+  fclose(fp);
+  fp = fopen("itens.dat","rb");
+  while(fread(itemLido, sizeof(Item), 1, fp)){
+    if (itemLido->status == 1 && itemLido->local == 'a'){
+      if (achou == num){
+        if (tela_acabouItem(itemLido)){
+          break;
+        }
+        x = itemLido->quantidade;
+        itemLido->quantidade = x - 1;
+        regravarItem(itemLido);
+      }
+      achou +=1;
+    }
+  }
+  free(itemLido);
+  fclose(fp);
   return num;
 }
 
 int storageFreezer(void){
   char esc[256];
   int validar1;
+  int n = 1,achou = 1,x,m = 0;
+  FILE *fp;
+  Item *itemLido;
+  itemLido = (Item*) malloc(sizeof(Item));
   system("clear");
   printf("========================================================\n");
   printf("==                       Freezer                      ==\n");
   printf("========================================================\n"); 
-  exibirTodosItens();
+  fp = fopen("itens.dat","rb");
+  if(fp == NULL){
+    printf("\nArquivo Criado");
+    fp = fopen("itens.dat","wb");
+  }
+  else{
+    while(fread(itemLido, sizeof(Item), 1, fp)){
+      if((itemLido->status) &&(itemLido->local == 'f')){
+        printf("\n= = = %dº Item Cadastrado = = =\n",n);
+        printf("Item: %s\n", itemLido->nome);
+        printf("Quantidade: %d\n", itemLido->quantidade);
+        printf("validade: %s\n", itemLido->validade);
+        printf("Perecível: ");
+        if(itemLido->perecivel == 's'){
+          printf("Sim\n");
+        }
+        else{
+          printf("Não\n");
+        }
+        printf("Local: Freezer\n");
+        n +=1;
+        m +=1;
+      }
+    }
+  }  
+  if((m ==0)&&(n == 1)){
+      printf("\nNão há itens nesse local!");
+    }
   printf("\n\t→ Digite sua opção:\n");
   scanf("%[^\n]",esc);
   getchar();
@@ -152,6 +291,27 @@ int storageFreezer(void){
     validar1 = validarStringNumerica(esc);
   }
   int num = converterEmInteiro(esc);
+  ////////////
+  free(itemLido);
+  itemLido = (Item*) malloc(sizeof(Item));
+  fclose(fp);
+  fp = fopen("itens.dat","rb");
+
+  while(fread(itemLido, sizeof(Item), 1, fp)){
+    if (itemLido->status == 1 && itemLido->local == 'f'){
+      if (achou == num){
+        if (tela_acabouItem(itemLido)){
+          break;
+        }
+        x = itemLido->quantidade;
+        itemLido->quantidade = x - 1;
+        regravarItem(itemLido);
+      }
+      achou +=1;
+    }
+  }
+  free(itemLido);
+  fclose(fp);
   return num;
 }
 
@@ -170,51 +330,12 @@ void pegarItem(void){
 
   if(esc == 1){
     num = storageGeladeira();
-    while(fread(itn, sizeof(Item), 1, fp)){
-      if (itn->status == 1){
-        if (achou == num){
-          if (x == tela_acabouItem(itn)){
-            break;
-          }
-          x = itn->quantidade;
-          itn->quantidade = x - 1;
-          regravarItem(itn);
-        }
-        achou +=1;
-      }
-    }
   }
   if(esc == 2){
     num = storageArmario();
-    while(fread(itn, sizeof(Item), 1, fp)){
-      if (itn->status == 1){
-        if (achou == num){
-          if (x == tela_acabouItem(itn)){
-            break;
-          }
-          x = itn->quantidade;
-          itn->quantidade = x - 1;
-          regravarItem(itn);
-        }
-        achou +=1;
-      }
-    }
   }
   if(esc == 3){
     num = storageFreezer();
-    while(fread(itn, sizeof(Item), 1, fp)){
-      if (itn->status == 1){
-        if (achou == num){
-          if (x == tela_acabouItem(itn)){
-            break;
-          }
-          x = itn->quantidade;
-          itn->quantidade = x - 1;
-          regravarItem(itn);
-        }
-        achou +=1;
-      }
-    }
   }
   free(itn);
   fclose(fp);
@@ -272,7 +393,7 @@ void descarte(void){
   fclose(fp);
 }
 
-void relatorioPessoal(void){
+void exibirEstoque(void){
   system("clear");
   printf("========================================================\n");
   printf("==                Todos Itens disponíveis             ==\n");
@@ -301,13 +422,16 @@ void adicionarItem(void){
     scanf("%s",vet);
     getchar();
   }while(formaData(vet) || !validarData(vet));
-  printf("\n\t>>> Aperte enter ...");
-  scanf(vet, itn->validade);
+  strcpy(itn->validade,vet);
   printf("\n\tQuantidade:");
   scanf("%d",&itn->quantidade);
   getchar();
+  itn->quantidadeE = itn->quantidade;
   printf("\n\tItem é perecivel?(s/n) ");
   scanf("%c",&itn->perecivel);
+  getchar();
+  printf("\n\t-- Geladeira - g\n\t-- Freezer - f\n\t-- Armario - a\nLocal onde vai ficar o item:");
+  scanf("%c",&itn->local);
   getchar();
   itn->status = True;
 
@@ -327,15 +451,13 @@ void adicionarItem(void){
 }
 
 int tela_acabouItem(Item* itn){
-  int n = 0;
   if(itn->quantidade == 0){
     printf("Item acabou no estoque!");
     sleep(3);
     system("clear");
-    n = 1;
-    return n;
+    return 1;
   }
-  return n;
+  return 0;
 }
 
 void gravarItem(Item* itn) { // Grava struct em arquivo binário
@@ -422,17 +544,38 @@ void exibirTodosItens (void){// Exibe todos os itens do Arquivo bin
 		printf("\n\t==================================");
     printf("\n\t====  Erro ao abrir arquivo   ====");
     printf("\n\t==================================");
-    sleep(3);
+    fp = fopen("itens.dat","wb");
+    printf("\nArquivo Criado com sucesso!");
   }
-
-  while(fread(itemLido, sizeof(Item), 1, fp)){
-    if(itemLido->status){
-      printf("\n= = = %dº Item Cadastrado = = =\n",num);
-      printf("Item: %s\n", itemLido->nome);
-      printf("Quantidade: %d\n", itemLido->quantidade);
-      printf("validade: %s\n", itemLido->validade);
-      printf("Perecível: %c\n", itemLido->perecivel);
-      num += 1;
+  else{
+    while(fread(itemLido, sizeof(Item), 1, fp)){
+      if(itemLido->status){
+        printf("\n= = = %dº Item Cadastrado = = =\n",num);
+        printf("Item: %s\n", itemLido->nome);
+        printf("Quantidade: %d\n", itemLido->quantidade);
+        printf("validade: %s\n", itemLido->validade);
+        printf("Perecível: ");
+        if(itemLido->perecivel == 's'){
+          printf("Sim\n");
+        }
+        else{
+          printf("Não\n");
+        }
+        printf("Local: ");
+        if(itemLido->local == 'a'){
+          printf("Armário\n");
+        }
+        else if(itemLido->local == 'g'){
+          printf("Geladeira\n");
+        }
+        else if(itemLido->local == 'f'){
+          printf("Freezer\n");
+        }
+        else{
+          printf("Não definido");
+        }
+        num += 1;
+      }
     }
   }
   
@@ -465,7 +608,7 @@ int userOptions(void){
   }
 
   if(opc1 == 3){
-    relatorioPessoal();
+    exibirEstoque();
   }
   if(opc1 == 4){
     relatorioGeral(); 
