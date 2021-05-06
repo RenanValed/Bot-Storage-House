@@ -24,9 +24,9 @@ int menuMorador(void){
   printf("==                                                    ==\n");
   printf("==    1- Pegar item                                   ==\n"); //ok
   printf("==    2- Descartar item                               ==\n"); //ok
-  printf("==    3- Meu Relatório                                ==\n"); //ok
-  printf("==    4- Relatório da Casa                            ==\n"); //ok
-  printf("==    5- Adicionar item                               ==\n"); //ok
+  printf("==    3- Exibir estoque completo                      ==\n"); //
+  printf("==    4- Relatório da Casa                            ==\n"); //
+  printf("==    5- Adicionar item                               ==\n"); //
   printf("==    0- Voltar ao Menu principal                     ==\n"); 
   printf("========================================================\n"); 
   printf("\n\t→ Digite sua opção:\n");
@@ -173,7 +173,7 @@ void pegarItem(void){
     while(fread(itn, sizeof(Item), 1, fp)){
       if (itn->status == 1){
         if (achou == num){
-          if (x = tela_acabouItem(itn)){
+          if (x == tela_acabouItem(itn)){
             break;
           }
           x = itn->quantidade;
@@ -189,7 +189,7 @@ void pegarItem(void){
     while(fread(itn, sizeof(Item), 1, fp)){
       if (itn->status == 1){
         if (achou == num){
-          if (x = tela_acabouItem(itn)){
+          if (x == tela_acabouItem(itn)){
             break;
           }
           x = itn->quantidade;
@@ -205,7 +205,7 @@ void pegarItem(void){
     while(fread(itn, sizeof(Item), 1, fp)){
       if (itn->status == 1){
         if (achou == num){
-          if (x = tela_acabouItem(itn)){
+          if (x == tela_acabouItem(itn)){
             break;
           }
           x = itn->quantidade;
@@ -275,9 +275,9 @@ void descarte(void){
 void relatorioPessoal(void){
   system("clear");
   printf("========================================================\n");
-  printf("==                  Relatório Pessoal                 ==\n");
+  printf("==                Todos Itens disponíveis             ==\n");
   printf("========================================================\n");
-  printf("\n\t *Será exibido os dados do Individo, tais como: entradas, saidas, descartes\n");
+  exibirTodosItens();
   printf("\n\n\t\033[0;32m>>Click Enter...\033[0m");
   getchar();
 }
@@ -334,14 +334,14 @@ int tela_acabouItem(Item* itn){
   return n;
 }
 
-void gravarItem(Item* itn) { // Grava struct em arqivo binário
+void gravarItem(Item* itn) { // Grava struct em arquivo binário
   FILE* fp;
 
   fp = fopen("itens.dat", "ab");
   if (fp == NULL) {
     printf("Ops! Ocorreu um erro na abertura do arquivo!\n");
-    printf("Não é possível continuar este programa...\n");
-    exit(1);
+    printf("Criei um novo arquivo para prosseguir :D\n");
+    fp = fopen("itens.dat","wb");
   }
   fwrite(itn, sizeof(Item), 1, fp);
   fclose(fp);
@@ -378,7 +378,7 @@ void regravarItem(Item* itn) {
 	itemLido = (Item*) malloc(sizeof(Item));
 	fp = fopen("itens.dat", "r+b");
 	if (fp == NULL) {
-
+    printf("\nProblemas para atualizar arquivo\n");
 	}
 	while(fread(itemLido, sizeof(Item), 1, fp)) {
 		if (strcmp(itemLido->nome, itn->nome) == 0) {

@@ -23,74 +23,12 @@ void cadastrarUser(void);
 ///////////////////////////////////////
 
 int main(void) {
-    //menuSobre();
-    char esc[256];
-    int validar1,validar2,opcao,logintype,opc;
-    menuInicial();
-    ///
-    scanf("%[^\n]",esc);
-    getchar();
-    // validação para entrar apenas numeros
-    validar1 = validarStringNumerica(esc);
-    validar2 = 0;
-    if (!validar1){
-      opcao = converterEmInteiro(esc);
-      validar2 = validarMenu(opcao,0,2);
-    }
-    while(validar1 || validar2){
-      printf("\n\t¢ Opção Inválida!\n");
-      printf("\n\t→ Digite sua opção:\n");
-      scanf("%[^\n]",esc);
-      getchar();
-      validar1 = validarStringNumerica(esc);
-      if (!validar1){
-        opcao = converterEmInteiro(esc);
-        validar2 = validarMenu(opcao,0,2);
-      }
-    }//fim da validação
-
-    while(opcao != 0){
-      // sessão de cadastro
-      if (opcao == 1){
-        cadastrarUser();
-      }
-      
-      // sessão de login
-      if(opcao == 2){
-        login();
-      }
-      do{
-        opc = userOptions();   
-      }while(opc != 0);
-      
-
-      // atualização para saber se continuar ou sair
-      menuInicial();
-      scanf("%[^\n]",esc);
-      getchar();
-
-      // validação para entrar apenas numeros
-      validar1 = validarStringNumerica(esc);
-      validar2 = 0;
-      if (!validar1){
-        opcao = converterEmInteiro(esc);
-        validar2 = validarMenu(opcao,0,2);
-      }
-      while(validar1 || validar2){
-        printf("\n\t¢ Opção Inválida!\n");
-        printf("\n\t→ Digite sua opção:\n");
-        scanf("%[^\n]",esc);
-        getchar();
-        validar1 = validarStringNumerica(esc);
-        if (!validar1){
-          opcao = converterEmInteiro(esc);
-          validar2 = validarMenu(opcao,0,2);
-        }
-      }
-      //fim da validação
-    } 
-    printf("\n\tFim do programa");
-    return 0;
+  int opc;
+  do{
+    opc = userOptions();   
+  }while(opc != 0);
+  printf("\n\tFim do programa");
+  return 0;
 
 }
 

@@ -20,6 +20,8 @@ int tamanhoZero(char opc[]){ //retorna 1 caso vetor esteja vazio
   return 0;
 }
 
+
+
 int temDigito(char palavra[]) { //retorna 1 se houver numeros no vetor
   char letra;
   int tam;
@@ -167,3 +169,87 @@ int validarPalavra(char palavra[]){ // retorna 1 caso não seja apenas letras
   return 0;
 }
 
+int formaData(char palavra[13]){ // 1 caso seja inválida
+  //Verificar barras
+  if(palavra[2] != '/' || palavra[5] != '/'){
+    printf("Formato errado, tente usar: 00/00/0000\n");
+    return 1;
+  }
+  // Verificar ano
+  if(((palavra[6] != '2') && (palavra[6] != '1')) || (palavra[7] < '0') || (palavra[7] > '9' ) || (palavra[8] < '0') || (palavra[8] > '9' ) || (palavra[9] < '0') || (palavra[9] > '9' )){
+    printf("\n\t Só é aceito anos entre 1000-2999\n");
+    return 1;
+  }
+  //Verificar validade do mes
+  if((palavra[4] < '0' || palavra[4] > '9' ) || (palavra[3] != '0' && palavra[3] != '1')){
+    printf("\n\tMês inexistente!\n");
+    return 1;
+  }
+  // Verificar se o numero do dia esta valido
+  if(palavra[0] == '0' || palavra[0] == '1' || palavra[0] == '2'){
+    if(palavra[1] > '9' || palavra[1] < '0' ){
+      printf("\n\t Dia não Existe!\n");
+      return 1;
+    }
+  }
+  if (palavra[0] == '3'){
+    if(!(palavra[1] != '1' || palavra[1] != '0')){
+      printf("\n\t Dia não Existe!\n");
+      return 1;
+    }
+  }
+  printf("Formato da Data é válida!\n");
+  return 0;
+}
+
+int bissexto(char palavra[11]){// 1 caso seja bissexto
+  int num;
+  char ano[5];
+  for(int i = 0; i < 6; i++){
+    ano[i]= palavra[6+i];
+  }
+  num = converterEmInteiro(ano);
+  if((num % 4) == 0){
+    return 1;
+  }
+  else if((num % 100) == 0){
+    return 0;
+  }
+  else if((num % 400) == 0){
+    return 1;
+  }
+  return 0;
+}
+
+int validarData(char palavra[]){ // 1 caso data seja válida
+  int dia, mes;
+  char let1[3],let2[3];
+  for(int i = 1 ; i < 3; i++){
+    let1[i-1] = palavra[i-1];
+    let2[i-1] = palavra[i+2];
+  }
+  dia = converterEmInteiro(let1);
+  mes = converterEmInteiro(let2);
+  if (dia > 31 || dia == 0){
+    return 0;
+  }
+  else if(mes > 12 || mes == 0){
+    return 0;
+  }
+  else if(mes == 4 || mes == 6 || mes == 9 || mes == 11){
+    if(dia > 30){
+      return 0;
+    }
+  }
+  else if(mes == 2 && bissexto(palavra)){
+    if (dia > 29){
+      return 0;
+    }
+  }
+  else if(mes == 2){
+    if(dia > 28){
+      return 0;
+    }
+  }
+  return 1;
+}

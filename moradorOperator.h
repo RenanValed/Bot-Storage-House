@@ -14,9 +14,11 @@ void relatorioGeral(void);
 
 struct item_estrutura{
   char nome[81];
-  char validade[10];
+  char validade[11];
   int quantidade;
   char perecivel;
+  int quantidadeE;
+  char local;
   int status;
 };
 
