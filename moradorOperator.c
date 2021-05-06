@@ -86,7 +86,7 @@ int selectionStorage(void){
   return opc;
 }
 
-int storageGeladeira(void){
+int storageGeladeira(char tipo){
   char esc[256];
   int validar1;
   int n = 1,m = 0;
@@ -152,8 +152,13 @@ int storageGeladeira(void){
         if (tela_acabouItem(itemLido)){
           break;
         }
-        x = itemLido->quantidade;
-        itemLido->quantidade = x - 1;
+        if(tipo == 'p'){
+          x = itemLido->quantidade;
+          itemLido->quantidade = x - 1;
+        }
+        else if(tipo == 'd'){
+          itemLido->status = False;
+        }
         regravarItem(itemLido);
       }
       achou +=1;
@@ -164,7 +169,7 @@ int storageGeladeira(void){
   return num;
 }
 
-int storageArmario(void){
+int storageArmario(char tipo){
   char esc[256];
   int validar1;
   int n = 1,m = 0;
@@ -228,8 +233,13 @@ int storageArmario(void){
         if (tela_acabouItem(itemLido)){
           break;
         }
-        x = itemLido->quantidade;
-        itemLido->quantidade = x - 1;
+        if(tipo == 'p'){  
+          x = itemLido->quantidade;
+          itemLido->quantidade = x - 1;
+        }
+        else if(tipo == 'd'){
+          itemLido->status = False;
+        }
         regravarItem(itemLido);
       }
       achou +=1;
@@ -240,7 +250,7 @@ int storageArmario(void){
   return num;
 }
 
-int storageFreezer(void){
+int storageFreezer(char tipo){
   char esc[256];
   int validar1;
   int n = 1,achou = 1,x,m = 0;
@@ -303,8 +313,13 @@ int storageFreezer(void){
         if (tela_acabouItem(itemLido)){
           break;
         }
-        x = itemLido->quantidade;
-        itemLido->quantidade = x - 1;
+        if(tipo == 'p'){
+          x = itemLido->quantidade;
+          itemLido->quantidade = x - 1;
+        }
+        else if(tipo == 'd'){
+          itemLido->status = False;
+        }
         regravarItem(itemLido);
       }
       achou +=1;
@@ -317,6 +332,7 @@ int storageFreezer(void){
 
 void pegarItem(void){
   int esc, num,x,achou = 1,n;
+  char tipo = 'p';
   Item* itn;
   FILE* fp;
   fp = fopen("itens.dat","r+b");
@@ -329,13 +345,13 @@ void pegarItem(void){
   esc = selectionStorage();
 
   if(esc == 1){
-    num = storageGeladeira();
+    num = storageGeladeira(tipo);
   }
   if(esc == 2){
-    num = storageArmario();
+    num = storageArmario(tipo);
   }
   if(esc == 3){
-    num = storageFreezer();
+    num = storageFreezer(tipo);
   }
   free(itn);
   fclose(fp);
@@ -344,6 +360,7 @@ void pegarItem(void){
 void descarte(void){
   system("clear");
   int esc,num,achou = 1;
+  char tipo = 'd';
   FILE* fp;
   Item* itn;
   itn = (Item*) malloc(sizeof(Item));
@@ -354,40 +371,13 @@ void descarte(void){
   esc = selectionStorage();
 
   if(esc == 1){
-    num = storageGeladeira();
-    while(fread(itn, sizeof(Item), 1, fp)){
-      if (itn->status == 1){
-        if (achou == num){
-          itn->status = False;
-          regravarItem(itn);
-        }
-        achou +=1;
-      }
-    }
+    num = storageGeladeira(tipo);
   }
   if(esc == 2){
-    num = storageArmario();
-    while(fread(itn, sizeof(Item), 1, fp)){
-      if (itn->status == 1){
-        if (achou == num){
-          itn->status = False;
-          regravarItem(itn);
-        }
-        achou +=1;
-      }
-    }
+    num = storageArmario(tipo);
   }
   if(esc == 3){
-    num = storageFreezer();
-    while(fread(itn, sizeof(Item), 1, fp)){
-      if (itn->status == 1){
-        if (achou == num){
-          itn->status = False;
-          regravarItem(itn);
-        }
-        achou +=1;
-      }
-    }
+    num = storageFreezer(tipo);
   }
   free(itn);
   fclose(fp);
@@ -587,12 +577,35 @@ void exibirTodosItens (void){// Exibe todos os itens do Arquivo bin
 
 void relatorioGeral(void){
   system("clear");
+  FILE* fp;
+  Item* itn;
+  itn = (Item*)malloc(sizeof(Item));
+  fp = fopen("itens.dat","rb");
+  if (fp == NULL){
+    fp = fopen("itens.dat","wb");
+  }
+  printf("\t\t========================================================\n");
+  printf("\t\t==                    Relatório Geral                 ==\n");
+  printf("\t\t========================================================\n");
+  while (fread(itn,sizeof(Item),1,fp)){
+    if(itn->status){
+      printf("==    Foram consumidos \033[2;32m%d\033[0m do item \033[2;32m%s\033[0m que iniciou com \033[2;32m%d\033[0m de calidade até \033[2;32m%s\033[0m\n",(itn->quantidadeE - itn->quantidade),itn->nome,itn->quantidadeE,itn->validade);
+    }
+  }
   printf("========================================================\n");
-  printf("==                    Relatório Geral                 ==\n");
-  printf("========================================================\n");
-  printf("\n\t *Será exibido os dados Gerais, tais como: entradas, saidas, sobras e dicas para economizar no próximo mês*\n");
   printf("\n\n\t\033[1;32m>>Click Enter...\033[0m");
   getchar();
+  fclose(fp);
+  fp= fopen("itens.dat","rb");
+  while (fread(itn,sizeof(Item),1,fp)){
+    if(!itn->status){
+      printf("==    Foram descatados \033[1;31m%d\033[0m do item \033[1;31m%s\033[0m que iniciou com \033[1;31m%d\033[0m de calidade até \033[1;31m%s\033[0m\n",itn->quantidade,itn->nome,itn->quantidadeE,itn->validade);
+    }
+  }
+  printf("\n\n\t\033[1;32m>>Click Enter...\033[0m");
+  getchar();
+  free(itn);
+  fclose(fp);
 }
 
 ///////////////////////////////////////////////////
